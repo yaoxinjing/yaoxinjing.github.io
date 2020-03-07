@@ -20,27 +20,31 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="SLListwhy we need a new way to implement the List instead of using the Intlist that we leaned yesterday?the Reason is that the Intlist is what I so call neked recursive data structure.wenn we want to">
+<meta property="og:type" content="article">
+<meta property="og:title" content="the SLList">
+<meta property="og:url" content="http://yoursite.com/2020/03/07/cs61b%20java%20SLList/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="SLListwhy we need a new way to implement the List instead of using the Intlist that we leaned yesterday?the Reason is that the Intlist is what I so call neked recursive data structure.wenn we want to">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-07T04:58:15.000Z">
+<meta property="article:modified_time" content="2020-03-07T11:18:37.007Z">
 <meta property="article:author" content="Yaoxin Jing">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/">
+<link rel="canonical" href="http://yoursite.com/2020/03/07/cs61b%20java%20SLList/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false
+    isHome : false,
+    isPost : true
   };
 </script>
 
-  <title>Hexo</title>
+  <title>the SLList | Hexo</title>
   
 
 
@@ -155,10 +159,10 @@
             
 
   <div class="posts-expand">
-        
+      
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/07/cs61b%20java%20SLList/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -172,8 +176,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/07/cs61b%20java%20SLList/" class="post-title-link" itemprop="url">the SLList</a>
+          the SLList
         </h1>
 
         <div class="post-meta">
@@ -198,7 +201,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="SLList"><a href="#SLList" class="headerlink" title="SLList"></a>SLList</h1><h2 id="why-we-need-a-new-way-to-implement-the-List-instead-of-using-the-Intlist-that-we-leaned-yesterday"><a href="#why-we-need-a-new-way-to-implement-the-List-instead-of-using-the-Intlist-that-we-leaned-yesterday" class="headerlink" title="why we need a new way to implement the List instead of using the Intlist that we leaned yesterday?"></a>why we need a new way to implement the List instead of using the Intlist that we leaned yesterday?</h2><p>the Reason is that the Intlist is what I so call neked recursive data structure.wenn we want to use the Intlist,we must known specificlly erverything about recursive,that is hard for freshman.therefore we creat a new class so called Intlist,which is more closely resembkes the  list implementation that programers use in modern language,etc.the SLList play a middle man to help us to go arount the discomfort recursive.</p>
+        <h1 id="SLList"><a href="#SLList" class="headerlink" title="SLList"></a>SLList</h1><h2 id="why-we-need-a-new-way-to-implement-the-List-instead-of-using-the-Intlist-that-we-leaned-yesterday"><a href="#why-we-need-a-new-way-to-implement-the-List-instead-of-using-the-Intlist-that-we-leaned-yesterday" class="headerlink" title="why we need a new way to implement the List instead of using the Intlist that we leaned yesterday?"></a>why we need a new way to implement the List instead of using the Intlist that we leaned yesterday?</h2><p>the Reason is that the Intlist is what I so call neked recursive data structure.wenn we want to use the Intlist,we must known specificlly erverything about recursive,that is hard for freshman.therefore we creat a new class so called Intlist,which is more closely resembkes the  list implementation that programers use in modern language,etc.the SLList play a middle man to help us to go arount the discomfort recursive.</p>
 <h2 id="the-basic-composition-of-the-Intlist"><a href="#the-basic-composition-of-the-Intlist" class="headerlink" title="the basic composition of the Intlist"></a>the basic composition of the Intlist</h2><h3 id="Intnode-class"><a href="#Intnode-class" class="headerlink" title="Intnode class"></a>Intnode class</h3><p> this is what we leaned yesterday etc.Intlist(recursive data structure),instead of using the name Intlist hier we use the name Intnode.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Intnode</span><span class="params">()</span></span>&#123;</span><br><span class="line">  Intnode next;</span><br><span class="line">  <span class="keyword">int</span> Item;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Intnode</span><span class="params">(<span class="keyword">int</span> i, Intnode L)</span></span>&#123;</span><br><span class="line">    item= i;</span><br><span class="line">    next=L;          <span class="comment">//construct a new Intnode in the list</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -265,310 +268,48 @@
 <h4 id="Improvement-6-the-better-way-to-fix-the-crash-in-the-addlast-by-using-sentinel-node"><a href="#Improvement-6-the-better-way-to-fix-the-crash-in-the-addlast-by-using-sentinel-node" class="headerlink" title="Improvement #6 :the better way to fix the crash in the addlast() by using sentinel node"></a>Improvement #6 :the better way to fix the crash in the addlast() by using sentinel node</h4><p>the basic idea of s sentinel node is that the sentinel node is always there und hold a value,which we won’t care abour.a empty list with a sentinel node means that there is nothing follow the sentinel node etc.p is a sentinel node, p.next=null.And for a normal list the first element of the list is p.next.</p>
 <h3 id="the-whole-story-of-the-SLList"><a href="#the-whole-story-of-the-SLList" class="headerlink" title="the whole story of the SLList"></a>the whole story of the SLList</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SLList</span>	</span>&#123;</span><br><span class="line">  <span class="comment">//Nested class</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">IntNode</span>	</span>&#123; <span class="comment">//anyone outsids the class can't access inside.anyone inside can't access outside too</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> item;</span><br><span class="line">    <span class="keyword">public</span> IntNode next;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="title">IntNode</span><span class="params">(<span class="keyword">int</span> i,IntNode n)</span></span>&#123;</span><br><span class="line">      item=i;</span><br><span class="line">      next=n;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">private</span> IntNode sentinel;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> size;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//empty list</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">SLList</span><span class="params">()</span>	</span>&#123;</span><br><span class="line">     sentinel= <span class="keyword">new</span>	IntNode(<span class="number">66</span>,<span class="keyword">null</span>);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">SLList</span><span class="params">(<span class="keyword">int</span> x)</span>	</span>&#123;</span><br><span class="line">    size++;</span><br><span class="line">     sentinel= <span class="keyword">new</span>	IntNode(<span class="number">66</span>,<span class="keyword">null</span>);</span><br><span class="line">     sentinel.next= <span class="keyword">new</span>	IntNode(x,<span class="keyword">null</span>);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addFirt</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">   size++;</span><br><span class="line">   sentinel.next=<span class="keyword">new</span> Intnode(i, sentinel.next)</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getFirst</span><span class="params">()</span></span>&#123;</span><br><span class="line">     <span class="keyword">return</span> sentinel.next.item;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//iteration</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addlast</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">     size++;</span><br><span class="line">     Intnode p =sentinel;</span><br><span class="line">     <span class="keyword">while</span>(p.next !=<span class="keyword">null</span>)&#123;</span><br><span class="line">       p=p.next;</span><br><span class="line">     &#125;</span><br><span class="line">     p.next=<span class="keyword">new</span> IntNode(i,<span class="keyword">null</span>); <span class="comment">// note that the lastnode of a list always points to "null"</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//recursion</span></span><br><span class="line"></span><br><span class="line">   <span class="comment">//so called helper Metheod that help us to get the lastnode of a List start with the Node P</span></span><br><span class="line">  <span class="function"><span class="keyword">private</span> IntNode <span class="title">getLastNode</span><span class="params">(IntNode p)</span></span>&#123;</span><br><span class="line">     <span class="keyword">if</span>(p.next==<span class="keyword">null</span>)  <span class="comment">//basic case</span></span><br><span class="line">       <span class="keyword">return</span> p;</span><br><span class="line">     <span class="keyword">return</span> getLastNode(p.next);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addlast</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">     IntNode last=getlastNode(sentinel);</span><br><span class="line">     last.next=<span class="keyword">new</span> IntNode(i,<span class="keyword">null</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function">pubulic <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>&#123;</span><br><span class="line">     <span class="keyword">return</span> size;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      
     </div>
 
     
     
     
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="Yaoxin Jing WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+
+  </div>
+</div>
+
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
         
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/06/how%20to%20write%20blog%20with%20makedown%20grammar/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar1.jpg">
-      <meta itemprop="name" content="Yaoxin Jing">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/06/how%20to%20write%20blog%20with%20makedown%20grammar/" class="post-title-link" itemprop="url">how-to-write-blog-with-makedown-grammar</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-03-06 21:00:30 / Modified: 21:34:05" itemprop="dateCreated datePublished" datetime="2020-03-06T21:00:30+01:00">2020-03-06</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91/" itemprop="url" rel="index"><span itemprop="name">文本编辑</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="makedown-语法"><a href="#makedown-语法" class="headerlink" title="makedown 语法"></a>makedown 语法</h1><h2 id="什么是”Makedown”语法"><a href="#什么是”Makedown”语法" class="headerlink" title="什么是”Makedown”语法"></a>什么是”Makedown”语法</h2><p>Makedown 语法是一种纯语言的文本编辑语言，它运用程序员写程序的思路，用类似于“编程语言”一样的语法，完成各种文本编辑、排版工作。</p>
-<h2 id="Makedown语言的基本语法格式"><a href="#Makedown语言的基本语法格式" class="headerlink" title="Makedown语言的基本语法格式"></a>Makedown语言的基本语法格式</h2><h3 id="一、标题"><a href="#一、标题" class="headerlink" title="一、标题"></a>一、标题</h3><p>在设置为标题的文字前加“#”<br>一个“#”是一级标题， 两个“#”是二级标题，依次类推。最大支持六级标题</p>
-<p>实例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. #这是一级标题</span><br><span class="line">2. ##这是二级标题</span><br><span class="line">.......</span><br></pre></td></tr></table></figure>
-
-<h3 id="二、列表"><a href="#二、列表" class="headerlink" title="二、列表"></a>二、列表</h3><h4 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h4><blockquote>
-<p>含义</p>
-</blockquote>
-<p>无序列表代表没有前后顺序</p>
-<blockquote>
-<p>语法</p>
-</blockquote>
-<p>在每个列表项前添加以下任意符号即可“+ * -”</p>
-<p><strong>注意：符号于列表项之间有一个空格</strong></p>
-<blockquote>
-<p>举例子</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">代码：</span><br><span class="line">* 我是列表项一</span><br><span class="line">+ 我是列表项二</span><br><span class="line">- 我是列表项三</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>效果</p>
-</blockquote>
-<ul>
-<li>我是列表项一</li>
-</ul>
-<ul>
-<li>我是列表项二</li>
-</ul>
-<ul>
-<li>我是列表项三</li>
-</ul>
-<h4 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h4><p>用法与无序代码相同，只需要各个列表项之前加 “数字和.”即可</p>
-<blockquote>
-<p>举例子</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">代码：</span><br><span class="line">1. 我是列表项一</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>效果</p>
-</blockquote>
-<ol>
-<li>我是列表项一</li>
-</ol>
-<h3 id="三、字体"><a href="#三、字体" class="headerlink" title="三、字体"></a>三、字体</h3><ul>
-<li><p>加粗</p>
-<p>要加粗的文字的两侧分别用“*” 号包起来</p>
-</li>
-<li><p>斜体</p>
-<p>要倾斜的文字的两侧分别用两个“*”号包起来</p>
-</li>
-<li><p>斜体加粗</p>
-<p>文字的两侧用分别用三个“*”号包起来</p>
-</li>
-</ul>
-<h3 id="四、引用（可以当作分隔符）"><a href="#四、引用（可以当作分隔符）" class="headerlink" title="四、引用（可以当作分隔符）"></a>四、引用（可以当作分隔符）</h3><ul>
-<li><p>用法：<br>文字前加“&gt;”</p>
-</li>
-<li><p>举例子</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">代码</span><br><span class="line">&gt;我是引用，也是分隔符</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>效果<blockquote>
-<p>我是一个引用，也可以当作分隔符</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="五，代码"><a href="#五，代码" class="headerlink" title="五，代码"></a>五，代码</h3><p>语法：</p>
-<p>单行代码：代码首尾之间分别用一个反引号“ ` ” 包起来</p>
-<p>多行代码：代码首尾之间分别用“ ``` ” 包起来</p>
-<h3 id="六、图片和超链接"><a href="#六、图片和超链接" class="headerlink" title="六、图片和超链接"></a>六、图片和超链接</h3><ul>
-<li><p><strong><em>超链接</em></strong></p>
-<ol>
-<li><p>语法</p>
-<p><code>[链接名称](链接地址)</code></p>
-</li>
-</ol>
-</li>
-</ul>
-<ol start="2">
-<li><p>举例子</p>
-<p> <a href="https://weibo.com/u/3170488771" target="_blank" rel="noopener">我的微博</a></p>
-</li>
-</ol>
-<ul>
-<li><p><strong><em>图片</em></strong></p>
-<ol>
-<li>语法<br><code>![图片名称](图片链接)</code></li>
-</ol>
-<p>2.举例子</p>
-</li>
-</ul>
-<pre><code>![我](\myblog\source\posts\IMG_9565.jpg)</code></pre>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
         
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/06/cs61b%20java%20summary/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar1.jpg">
-      <meta itemprop="name" content="Yaoxin Jing">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/06/cs61b%20java%20summary/" class="post-title-link" itemprop="url">cs61b-java-summary</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-03-06 20:59:50 / Modified: 21:40:36" itemprop="dateCreated datePublished" datetime="2020-03-06T20:59:50+01:00">2020-03-06</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="cs61b-java-sammary"><a href="#cs61b-java-sammary" class="headerlink" title="cs61b java sammary"></a>cs61b java sammary</h1><h2 id="一、the-Golden-rule-of-eqeal"><a href="#一、the-Golden-rule-of-eqeal" class="headerlink" title="一、the Golden rule of eqeal"></a>一、the Golden rule of eqeal</h2><h3 id="first-we-should-known-that-there-are-9-types-of-variable-in-java"><a href="#first-we-should-known-that-there-are-9-types-of-variable-in-java" class="headerlink" title="first we should known that there are 9 types of variable in java"></a>first we should known that there are 9 types of variable in java</h3><ul>
-<li>the first 8 types ist primitive types(byte,short,int,long….)</li>
-<li>the 9th type is referencese type called Object(referencese may be mull)</li>
-</ul>
-<p>the idea of the golden rule of equal is that every declared variable has a box to save the so called “bits”</p>
-<p>for the first 8 types of variable(primitive variable)the binary equivalent of this value is stored in the box</p>
-<p>for the Object the adress of the Object stored in the box(指针被存放在box中)，we can use the adress etc.pointer to find where the object is stored.</p>
-<h3 id="the-golden-rule"><a href="#the-golden-rule" class="headerlink" title="the golden rule"></a>the golden rule</h3><ul>
-<li>b=a copies the bits from a into b</li>
-<li>Passing parameters copies the bits</li>
-</ul>
-<blockquote>
-<p>note: for primitive variable afte copy a and b is independent etc. a changed and b still remain the old value.but for Object,afte copy and Pass the parameters the two object etc.a and b point to the same adress,a changed,b will been automatisch changed</p>
-</blockquote>
-<h2 id="二、-Decalaration-and-Instantiation-of-the-Arrays"><a href="#二、-Decalaration-and-Instantiation-of-the-Arrays" class="headerlink" title="二、 Decalaration and Instantiation of the Arrays"></a>二、 Decalaration and Instantiation of the Arrays</h2><p>the notation to declare und instantiate the new Arrays:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] X= <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>&#125;;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>crate a 64 bit box for storing an int array address(Decalaration)</p>
-</li>
-<li><p>creates a new object etc.Array</p>
-</li>
-<li><p>pute the address of the Array into the 64 bits box named X</p>
-</li>
-</ul>
-<blockquote>
-<p>the Arrays in java is also object.thats means that the variable x not stored the whole value of the Arrays but the address of the Array.(the address of the Array X ist the adress of X[0])</p>
-</blockquote>
-<h2 id="三、List"><a href="#三、List" class="headerlink" title="三、List"></a>三、List</h2><h3 id="the-simplest-IntList"><a href="#the-simplest-IntList" class="headerlink" title="the simplest IntList:"></a>the simplest IntList:</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IntNode</span>	</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> item;	<span class="comment">//the element that stored in a node of the list</span></span><br><span class="line">    <span class="keyword">public</span> IntNode next;  <span class="comment">//the referenc variable that point to the next node</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">IntList</span><span class="params">(<span class="keyword">int</span>	i,rest n)</span></span>&#123;</span><br><span class="line">          item=	i;</span><br><span class="line">          next=	n;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>to instantiate a list we can use folowing instruction in the main-function:<br>IntNode X= new IntNode(11,null);<br>IntNode X= new IntNode(12,X);<br>IntNode X=new IntNode(13,X);</p>
-<blockquote>
-<p>we get a list with 3 element(13 12 11)<br>note :13 is the first element and 11 is the last element</p>
-</blockquote>
-</blockquote>
-<h3 id="the-useful-methods"><a href="#the-useful-methods" class="headerlink" title="the useful methods"></a>the useful methods</h3><h4 id="size"><a href="#size" class="headerlink" title="size()"></a>size()</h4><ol>
-<li>Return the size of the list using recursion</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(rest==<span class="keyword">null</span>)   <span class="comment">//basic case</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>+next.size();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>for recursion we always need to think the basic case plus anorther situation.</p>
-</blockquote>
-<ol start="2">
-<li>Return the size of the list using iteration</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> size=<span class="number">0</span>;</span><br><span class="line">  Intnode currentNode=<span class="keyword">this</span>;     <span class="comment">//note that the value of the currentNode is not rest but current object</span></span><br><span class="line">  <span class="keyword">while</span>(currentNode!=<span class="keyword">null</span>)&#123;</span><br><span class="line">    size++;</span><br><span class="line">    currentNode=currentNode.next;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> size;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="get-int-i"><a href="#get-int-i" class="headerlink" title="get(int i)"></a>get(int i)</h4><ol>
-<li>get the item of the ith Object using the iteration</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> count=<span class="number">0</span>;</span><br><span class="line">  Intnode currentNode=<span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">while</span>(count!=i)&#123;</span><br><span class="line">    count++</span><br><span class="line">    currentNode=currentNode.next;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> currentNode.item;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>2.get the item of the ith Object using the recursion</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(i==<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> item;  <span class="comment">//basic case</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.netx.get(i-<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<p>Destructive vs.Non-Destructive methods</p>
-<ul>
-<li>Destructive methods means the methosd modify the original list according to the requirements of the title</li>
-<li>Non-Destructive methods means the methods create a new list based on the  requirements and the original list</li>
-</ul>
-<hr>
-
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/06/how%20to%20write%20blog%20with%20makedown%20grammar/" rel="prev" title="how-to-write-blog-with-makedown-grammar">
+      <i class="fa fa-chevron-left"></i> how-to-write-blog-with-makedown-grammar
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
   
 
   </div>
-
-  
-
 
 
           </div>
@@ -619,6 +360,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SLList"><span class="nav-number">1.</span> <span class="nav-text">SLList</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#why-we-need-a-new-way-to-implement-the-List-instead-of-using-the-Intlist-that-we-leaned-yesterday"><span class="nav-number">1.1.</span> <span class="nav-text">why we need a new way to implement the List instead of using the Intlist that we leaned yesterday?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#the-basic-composition-of-the-Intlist"><span class="nav-number">1.2.</span> <span class="nav-text">the basic composition of the Intlist</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intnode-class"><span class="nav-number">1.2.1.</span> <span class="nav-text">Intnode class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SLList-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">SLList</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#the-basic-function-of-the-SLList"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">the basic function of the SLList</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#addFirt-and-getFirst"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">addFirt and getFirst</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#instatiation-a-List-using-SLList"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">instatiation a List using SLList</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Improvement-1-public-vs-Private"><span class="nav-number">1.2.2.4.</span> <span class="nav-text">Improvement #1 :public vs. Private</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Improvement-2-Nested-Classes"><span class="nav-number">1.2.2.5.</span> <span class="nav-text">Improvement #2 :Nested Classes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Improvement-3-addLast-and-sive"><span class="nav-number">1.2.2.6.</span> <span class="nav-text">Improvement #3 addLast() and sive()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Improvement-4-the-more-effcient-way-to-implement-the-size-so-called-Caching"><span class="nav-number">1.2.2.7.</span> <span class="nav-text">Improvement #4 :the more effcient way to implement the size() so called Caching</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Improvement-5-The-Empty-list"><span class="nav-number">1.2.2.8.</span> <span class="nav-text">Improvement #5 The Empty list</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Improvement-6-the-better-way-to-fix-the-crash-in-the-addlast-by-using-sentinel-node"><span class="nav-number">1.2.2.9.</span> <span class="nav-text">Improvement #6 :the better way to fix the crash in the addlast() by using sentinel node</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#the-whole-story-of-the-SLList"><span class="nav-number">1.2.3.</span> <span class="nav-text">the whole story of the SLList</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
