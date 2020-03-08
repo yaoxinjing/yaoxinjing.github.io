@@ -28,7 +28,7 @@
 <meta property="og:description" content="The Alist(Array list)Why we need a ALList instead of using DLList(double link list)？Wenn we use  DLList,we can easily add or delete a item in the front and back of the list,but what if we want to get">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-03-08T09:07:01.000Z">
-<meta property="article:modified_time" content="2020-03-08T11:10:59.159Z">
+<meta property="article:modified_time" content="2020-03-08T11:17:38.013Z">
 <meta property="article:author" content="Yaoxin Jing">
 <meta property="article:tag" content="java学习笔记">
 <meta name="twitter:card" content="summary">
@@ -188,7 +188,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-03-08 10:07:01 / Modified: 12:10:59" itemprop="dateCreated datePublished" datetime="2020-03-08T10:07:01+01:00">2020-03-08</time>
+              <time title="Created: 2020-03-08 10:07:01 / Modified: 12:17:38" itemprop="dateCreated datePublished" datetime="2020-03-08T10:07:01+01:00">2020-03-08</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -228,7 +228,7 @@
 <h2 id="Generic-Alist"><a href="#Generic-Alist" class="headerlink" title="Generic Alist"></a>Generic Alist</h2><p>The bacic idea is similar as generic DLList or SLList,but one different is that java basically don’t allow us to declare a Generic AList. To achieve our goal we need a more tricky way:</p>
 <p>first we declare a object array then downcast（向下转型）to Generic</p>
 <blockquote>
-<p>声明一个元类型数组，向下转型的“泛型”</p>
+<p>声明一个元类型数组，向下转型到“泛型”</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Generic[] items =（Generic []）<span class="keyword">new</span> object[<span class="number">8</span>]</span><br></pre></td></tr></table></figure>
 
