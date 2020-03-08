@@ -20,10 +20,12 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+  <meta name="description" content="人生苦短，我学Java">
+<meta property="og:type" content="website">
+<meta property="og:title" content="正经星人のBOKE">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="正经星人のBOKE">
+<meta property="og:description" content="人生苦短，我学Java">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Yaoxin Jing">
 <meta name="twitter:card" content="summary">
@@ -40,7 +42,7 @@
   };
 </script>
 
-  <title>Hexo</title>
+  <title>正经星人のBOKE</title>
   
 
 
@@ -92,10 +94,11 @@
     <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hexo</span>
+        <span class="site-title">正经星人のBOKE</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
+        <p class="site-subtitle">学僧一枚</p>
   </div>
 
   <div class="site-nav-right">
@@ -159,16 +162,135 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/08/cs-61b-3-1-Testing-and-Selection-sort/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+      <meta itemprop="name" content="Yaoxin Jing">
+      <meta itemprop="description" content="人生苦短，我学Java">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正经星人のBOKE">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/08/cs-61b-3-1-Testing-and-Selection-sort/" class="post-title-link" itemprop="url">cs 61b 3.1 Testing and Selection sort</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-03-08 21:18:22 / Modified: 21:19:30" itemprop="dateCreated datePublished" datetime="2020-03-08T21:18:22+01:00">2020-03-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Testing-and-Selection-Sort"><a href="#Testing-and-Selection-Sort" class="headerlink" title="Testing and Selection Sort)"></a>Testing and Selection Sort)</h1><h2 id="Testing"><a href="#Testing" class="headerlink" title="Testing"></a>Testing</h2><h3 id="2-different-Approach-to-write-a-Testing"><a href="#2-different-Approach-to-write-a-Testing" class="headerlink" title="2 different Approach to write a Testing"></a>2 different Approach to write a Testing</h3><h4 id="Ad-Hoc-Testing"><a href="#Ad-Hoc-Testing" class="headerlink" title="Ad Hoc Testing"></a>Ad Hoc Testing</h4><p>Wenn we want to verify for example a sort method in Class Sort ,we can  straight write a whole test method  by using loop.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSort</span>	</span>&#123;</span><br><span class="line"><span class="comment">/**	Tests	the	sort	method	of	the	Sort	class.	*/</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testSort</span><span class="params">()</span>	</span>&#123;</span><br><span class="line">		String[] input =&#123;<span class="string">"i"</span>,<span class="string">"have"</span>,<span class="string">"an"</span>,<span class="string">"egg"</span>&#125;;</span><br><span class="line">		String[] expected=&#123;<span class="string">"an"</span>,<span class="string">"egg"</span>,<span class="string">"have"</span>,<span class="string">"i"</span>&#125;;</span><br><span class="line">		Sort.sort(input);</span><br><span class="line">		<span class="keyword">for</span>	(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;input.length;i+=<span class="number">1</span>)&#123;</span><br><span class="line">			<span class="keyword">if</span>(!input[i].equals(expected[i]))	&#123;</span><br><span class="line">				System.out.println(<span class="string">"Mismatch in position"</span>+ i +<span class="string">",expected:"</span>+expected+<span class="string">",but got:"</span>+input[i]+<span class="string">"."</span>);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		testSort();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>We can test out our test by creating a blank Sort.sort method as showing bellow:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Sort</span></span>&#123;</span><br><span class="line"><span class="comment">/**	Sorts strings destructively.*/</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(String[] x)</span></span>&#123;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>if we run the testSort method with this black Sort.sort method ,we’d get:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Mismatch in position <span class="number">0</span>,expected:an,but got: i.</span><br></pre></td></tr></table></figure>
+
+<p>if we got this erro ,this means out test is working.</p>
+<blockquote>
+<p>Note:In order to compare whether 2 string e.g.input and expected or every position in the 2 String(input[i] and expected[i]) is equal, we can’t use  <strong>*””==””*</strong> , since the 2 string is Object,Therefore  <strong>*””==””*</strong>  would only compared the literal bits in the 2 memory box which store adresse of 2 String respectively.This means the compare of 2 String using “==”would never be true because the 2 String habe different addresse.</p>
+</blockquote>
+<blockquote>
+<p>The Type of Array and String is reference Type(Object).To compare content of a array or string we must use <strong><em>equals method</em></strong> in java.</p>
+</blockquote>
+<h3 id="JUnit-Testing"><a href="#JUnit-Testing" class="headerlink" title="JUnit Testing"></a>JUnit Testing</h3><p>Instead of writing whole test for Sort.sort,we could divide Sort.sort into diffrent part,for each of the part in the sort we first write a test then write code to achieve the feeture of this part.After successful testing of this part we moved on next part of sort.</p>
+<h4 id="Ein-example-Selection-Sorts"><a href="#Ein-example-Selection-Sorts" class="headerlink" title="Ein example: Selection Sorts"></a>Ein example: Selection Sorts</h4><h5 id="The-idea-of-Selection-Sort"><a href="#The-idea-of-Selection-Sort" class="headerlink" title="The idea of Selection Sort"></a>The idea of Selection Sort</h5><ul>
+<li>find the smallest item</li>
+<li>move it to the front</li>
+<li>selection sort the remaining N-1 items(without touching front item!)</li>
+</ul>
+<h3 id="A-bunch-of-tricks-in-testing-debuger"><a href="#A-bunch-of-tricks-in-testing-debuger" class="headerlink" title="A bunch of tricks in testing/debuger"></a>A bunch of tricks in testing/debuger</h3><h4 id="2-option-about-debuger"><a href="#2-option-about-debuger" class="headerlink" title="2 option about debuger"></a>2 option about debuger</h4><ul>
+<li>step over ：By using this option we can easily get a result of a function and ignore the any tedious in this function,Using this approach we can quikly find which part of sort is not correct then fix it.</li>
+</ul>
+<ul>
+<li>step in : By using this option we can go into a function and know every detail of this function. This is very boring to step into every part of sort and wast massiv time.But it can bu useful,wenn we use the option of step over find out which part of Sort is incorrect,we can step into this part to find out what’s really wrong.</li>
+</ul>
+<h4 id="Simple-JUnit"><a href="#Simple-JUnit" class="headerlink" title="Simple JUnit"></a>Simple JUnit</h4><p>Instead of using a loop to find out whether 2 String is equal we can easily use a function called assertEquals in JUnit to compare the 2 string.This function can automatic compare 2 String and tell us in which position the 2 string is not eqeal.What we need to do is only to give the 2 string.</p>
+<ul>
+<li><p>Syntax of this instruction</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">org.jnuit.Assert.assertEquals(expected,actual);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>JUnit does more:</p>
+<ul>
+<li>Other method like assertEquals include assertFalse assertNotNull,etc.</li>
+<li>other more complex behaviour to support more sophisticated testing.</li>
+</ul>
+</li>
+</ul>
+<h4 id="Write-a-Test-without-main-method"><a href="#Write-a-Test-without-main-method" class="headerlink" title="Write a Test without main method"></a>Write a Test without main method</h4><p>Instead of writing a main method to call our test method to test each part of Sort we can set a mark <strong><em>@org.jnuit.Test</em></strong> in the front of every test method,and click the button “run” to select the option <strong>* “run without main method”*</strong>,then we can easily know the result of test.</p>
+<ul>
+<li>Annotate each test with @org.jnuit.Test</li>
+<li>Change all test methods to non-static</li>
+<li>Use a JUnit runner to tun all tests and tabulate results.<ul>
+<li>IntelliJ provides a default runner/renderer.OK to delete main.</li>
+<li>Rendered output is easier to read ,no need to manually invoke tests!</li>
+</ul>
+</li>
+</ul>
+<h4 id="Annoying-by-function-prefix"><a href="#Annoying-by-function-prefix" class="headerlink" title="Annoying by function prefix"></a>Annoying by function prefix</h4><p>It is annoying to tyoe out the name of the library repeatedly,e.g. <strong><em>org.junit.Test</em></strong> and ***org.junit.Assert.assertEquals.</p>
+<p>To avoid this we’ll start every test file with：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.*;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/08/The-AList/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar1.jpg">
       <meta itemprop="name" content="Yaoxin Jing">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="人生苦短，我学Java">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="正经星人のBOKE">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -253,11 +375,11 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar1.jpg">
       <meta itemprop="name" content="Yaoxin Jing">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="人生苦短，我学Java">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="正经星人のBOKE">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -359,11 +481,11 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar1.jpg">
       <meta itemprop="name" content="Yaoxin Jing">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="人生苦短，我学Java">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="正经星人のBOKE">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -459,11 +581,11 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar1.jpg">
       <meta itemprop="name" content="Yaoxin Jing">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="人生苦短，我学Java">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="正经星人のBOKE">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -592,11 +714,11 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar1.jpg">
       <meta itemprop="name" content="Yaoxin Jing">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="人生苦短，我学Java">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="正经星人のBOKE">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -751,11 +873,11 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar1.jpg">
       <meta itemprop="name" content="Yaoxin Jing">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="人生苦短，我学Java">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="正经星人のBOKE">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -931,14 +1053,14 @@
     <img class="site-author-image" itemprop="image" alt="Yaoxin Jing"
       src="/images/avatar1.jpg">
   <p class="site-author-name" itemprop="name">Yaoxin Jing</p>
-  <div class="site-description" itemprop="description"></div>
+  <div class="site-description" itemprop="description">人生苦短，我学Java</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1050,5 +1172,7 @@
 
   
 
+  <script type="text/javascript" color="0,0,0" opacity='0.5' zIndex="-1" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
 </body>
 </html>
