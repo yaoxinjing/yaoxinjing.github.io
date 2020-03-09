@@ -28,7 +28,7 @@
 <meta property="og:description" content="Testing and Selection Sort)Testing2 different Approach to write a TestingAd Hoc TestingWenn we want to verify for example a sort method in Class Sort ,we can  straight write a whole test method  by us">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-03-08T20:18:22.000Z">
-<meta property="article:modified_time" content="2020-03-08T20:19:30.224Z">
+<meta property="article:modified_time" content="2020-03-09T06:45:29.634Z">
 <meta property="article:author" content="Yaoxin Jing">
 <meta property="article:tag" content="java学习笔记">
 <meta name="twitter:card" content="summary">
@@ -187,10 +187,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-03-08 21:18:22 / Modified: 21:19:30" itemprop="dateCreated datePublished" datetime="2020-03-08T21:18:22+01:00">2020-03-08</time>
+              <time title="Created: 2020-03-08 21:18:22" itemprop="dateCreated datePublished" datetime="2020-03-08T21:18:22+01:00">2020-03-08</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-09 07:45:29" itemprop="dateModified" datetime="2020-03-09T07:45:29+01:00">2020-03-09</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -265,6 +271,16 @@
 <p>To avoid this we’ll start every test file with：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.*;</span><br></pre></td></tr></table></figure>
 
+<h3 id="The-right-way-to-wirte-code-summary"><a href="#The-right-way-to-wirte-code-summary" class="headerlink" title="The right way to wirte code summary"></a>The right way to wirte code summary</h3><p>we should write our code follow the rule below(Test-Driven Development(TDD)):</p>
+<ul>
+<li>Find out what we need to do in our code(what is our job in the task).</li>
+<li>Divide the whole task into different part(different unit),each of which implement a simple part of this task.</li>
+<li>Befor write a unit of whole task,wirte a test for this JUnit</li>
+<li>Run this test,it should fail.</li>
+<li>Write code that passes test</li>
+<li>Then we move to next part(unit) and repeat Step three to step five until we complete the whole task.</li>
+</ul>
+
     </div>
 
     
@@ -300,7 +316,10 @@
     <a href="/2020/03/08/The-AList/" rel="prev" title="cs61b the AList">
       <i class="fa fa-chevron-left"></i> cs61b the AList
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/09/cs-61b-4-1-Interface-and-Implementation-Inheritance/" rel="next" title="cs 61b 4.1 Interface and Implementation Inheritance">
+      cs 61b 4.1 Interface and Implementation Inheritance <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -360,7 +379,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Testing-and-Selection-Sort"><span class="nav-number">1.</span> <span class="nav-text">Testing and Selection Sort)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Testing"><span class="nav-number">1.1.</span> <span class="nav-text">Testing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-different-Approach-to-write-a-Testing"><span class="nav-number">1.1.1.</span> <span class="nav-text">2 different Approach to write a Testing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ad-Hoc-Testing"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">Ad Hoc Testing</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JUnit-Testing"><span class="nav-number">1.1.2.</span> <span class="nav-text">JUnit Testing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ein-example-Selection-Sorts"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">Ein example: Selection Sorts</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#The-idea-of-Selection-Sort"><span class="nav-number">1.1.2.1.1.</span> <span class="nav-text">The idea of Selection Sort</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-bunch-of-tricks-in-testing-debuger"><span class="nav-number">1.1.3.</span> <span class="nav-text">A bunch of tricks in testing&#x2F;debuger</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-option-about-debuger"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">2 option about debuger</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Simple-JUnit"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">Simple JUnit</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Write-a-Test-without-main-method"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">Write a Test without main method</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Annoying-by-function-prefix"><span class="nav-number">1.1.3.4.</span> <span class="nav-text">Annoying by function prefix</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Testing-and-Selection-Sort"><span class="nav-number">1.</span> <span class="nav-text">Testing and Selection Sort)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Testing"><span class="nav-number">1.1.</span> <span class="nav-text">Testing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-different-Approach-to-write-a-Testing"><span class="nav-number">1.1.1.</span> <span class="nav-text">2 different Approach to write a Testing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ad-Hoc-Testing"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">Ad Hoc Testing</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JUnit-Testing"><span class="nav-number">1.1.2.</span> <span class="nav-text">JUnit Testing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ein-example-Selection-Sorts"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">Ein example: Selection Sorts</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#The-idea-of-Selection-Sort"><span class="nav-number">1.1.2.1.1.</span> <span class="nav-text">The idea of Selection Sort</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-bunch-of-tricks-in-testing-debuger"><span class="nav-number">1.1.3.</span> <span class="nav-text">A bunch of tricks in testing&#x2F;debuger</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-option-about-debuger"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">2 option about debuger</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Simple-JUnit"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">Simple JUnit</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Write-a-Test-without-main-method"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">Write a Test without main method</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Annoying-by-function-prefix"><span class="nav-number">1.1.3.4.</span> <span class="nav-text">Annoying by function prefix</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-right-way-to-wirte-code-summary"><span class="nav-number">1.1.4.</span> <span class="nav-text">The right way to wirte code summary</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -376,7 +395,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
