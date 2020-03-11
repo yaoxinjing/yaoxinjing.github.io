@@ -30,7 +30,7 @@
 <meta property="og:image" content="http://yoursite.com/.com//cs-61b-Extends-Casting-Higher-Order-Functions-Capture1.PNG">
 <meta property="og:image" content="http://yoursite.com/.com//Capture2.PNG">
 <meta property="article:published_time" content="2020-03-09T14:24:15.000Z">
-<meta property="article:modified_time" content="2020-03-10T03:42:31.187Z">
+<meta property="article:modified_time" content="2020-03-11T17:22:19.567Z">
 <meta property="article:author" content="Yaoxin Jing">
 <meta property="article:tag" content="java学习笔记">
 <meta name="twitter:card" content="summary">
@@ -198,7 +198,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-10 04:42:31" itemprop="dateModified" datetime="2020-03-10T04:42:31+01:00">2020-03-10</time>
+                <time title="Modified: 2020-03-11 18:22:19" itemprop="dateModified" datetime="2020-03-11T18:22:19+01:00">2020-03-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -221,11 +221,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Extends-Casting-Higher-Order"><a href="#Extends-Casting-Higher-Order" class="headerlink" title="Extends Casting Higher Order"></a>Extends Casting Higher Order</h1><h2 id="Extends"><a href="#Extends" class="headerlink" title="Extends"></a>Extends</h2><h3 id="Why-we-need-“Extends”-instead-of-always-using-keyword-”implements”"><a href="#Why-we-need-“Extends”-instead-of-always-using-keyword-”implements”" class="headerlink" title="Why we need “Extends” instead of always using keyword *”implements”*"></a>Why we need “Extends” instead of always using keyword <strong>*”implements”*</strong></h3><p>As we know the Keyword implement a hieraichical relationship with interface(interface to interface,interface to class),but what if we want to define a hieraichical relationship between classes? In this case we can’t use keyword”implements” but keyword ***”extends”.</p>
+        <h1 id="Extends-Casting-Higher-Order"><a href="#Extends-Casting-Higher-Order" class="headerlink" title="Extends Casting Higher Order"></a>Extends Casting Higher Order</h1><h2 id="Extends"><a href="#Extends" class="headerlink" title="Extends"></a>Extends</h2><h3 id="Why-we-need-“Extends”-instead-of-always-using-keyword-”implements”"><a href="#Why-we-need-“Extends”-instead-of-always-using-keyword-”implements”" class="headerlink" title="Why we need “Extends” instead of always using keyword *”implements”*"></a>Why we need “Extends” instead of always using keyword <strong>*”implements”*</strong></h3><p>As we know the Keyword <strong><em>implement</em></strong> a hieraichical relationship with interface(interface to interface,interface to class),but what if we want to define a hieraichical relationship between classes? In this case we can’t use keyword”implements” but keyword  <strong><em>extends</em></strong> .</p>
 <blockquote>
 <p>Advantage of “extends”:<br>Allow subclasses to reuse code from an already defined class.</p>
 </blockquote>
-<h3 id="How-to-define-this-inheritace-relationship-in-the-class-header"><a href="#How-to-define-this-inheritace-relationship-in-the-class-header" class="headerlink" title="How to define this inheritace relationship in the class header:"></a>How to define this inheritace relationship in the class header:</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>	<span class="class"><span class="keyword">class</span>	<span class="title">RotatingSLList</span>&lt;<span class="title">Item</span>&gt;	<span class="keyword">extends</span>	<span class="title">SLList</span>&lt;<span class="title">Item</span>&gt;</span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="How-to-define-this-inheritace-relationship-in-the-class-header"><a href="#How-to-define-this-inheritace-relationship-in-the-class-header" class="headerlink" title="How to define this inheritace relationship in the class header:"></a>How to define this inheritace relationship in the class header:</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>	<span class="class"><span class="keyword">class</span>	<span class="title">RotatingSLList</span>&lt;<span class="title">Item</span>&gt; <span class="keyword">extends</span>	<span class="title">SLList</span>&lt;<span class="title">Item</span>&gt;</span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>By using thie keyword”extends” the subclass RotatingSLList<Item> get a special relationship called “is a” mit it’s superclass SLList so that RotatingSLList can use member and metheod which are not privat in SLList.<br>Besides that we can make modification by using “Overriding” and add additional functionality to our subclass”RotatingSLList”.</Item></p>
