@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Extends Casting Higher OrderExtendsWhy we need “Extends” instead of always using keyword *”implements”*As we know the Keyword implement a hieraichical relationship with interface(interface to interfac">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cs 61b 4.1 Extends Casting Higher Order Functions">
+<meta property="og:url" content="http://yoursite.com/2020/03/09/cs-61b-Extends-Casting-Higher-Order-Functions/index.html">
+<meta property="og:site_name" content="正经星人のBOKE">
+<meta property="og:description" content="Extends Casting Higher OrderExtendsWhy we need “Extends” instead of always using keyword *”implements”*As we know the Keyword implement a hieraichical relationship with interface(interface to interfac">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/.com//cs-61b-Extends-Casting-Higher-Order-Functions-Capture1.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//Capture2.PNG">
+<meta property="article:published_time" content="2020-03-09T14:24:15.000Z">
+<meta property="article:modified_time" content="2020-03-10T03:42:31.187Z">
+<meta property="article:author" content="Yaoxin Jing">
+<meta property="article:tag" content="java学习笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/.com//cs-61b-Extends-Casting-Higher-Order-Functions-Capture1.PNG">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/09/cs-61b-Extends-Casting-Higher-Order-Functions/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>cs 61b 4.1 Extends Casting Higher Order Functions | 正经星人のBOKE</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">正经星人のBOKE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">学僧一枚</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/09/cs-61b-Extends-Casting-Higher-Order-Functions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+      <meta itemprop="name" content="Yaoxin Jing">
+      <meta itemprop="description" content="人生苦短，我学Java">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正经星人のBOKE">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          cs 61b 4.1 Extends Casting Higher Order Functions
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-09 15:24:15" itemprop="dateCreated datePublished" datetime="2020-03-09T15:24:15+01:00">2020-03-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-10 04:42:31" itemprop="dateModified" datetime="2020-03-10T04:42:31+01:00">2020-03-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Extends-Casting-Higher-Order"><a href="#Extends-Casting-Higher-Order" class="headerlink" title="Extends Casting Higher Order"></a>Extends Casting Higher Order</h1><h2 id="Extends"><a href="#Extends" class="headerlink" title="Extends"></a>Extends</h2><h3 id="Why-we-need-“Extends”-instead-of-always-using-keyword-”implements”"><a href="#Why-we-need-“Extends”-instead-of-always-using-keyword-”implements”" class="headerlink" title="Why we need “Extends” instead of always using keyword *”implements”*"></a>Why we need “Extends” instead of always using keyword <strong>*”implements”*</strong></h3><p>As we know the Keyword implement a hieraichical relationship with interface(interface to interface,interface to class),but what if we want to define a hieraichical relationship between classes? In this case we can’t use keyword”implements” but keyword ***”extends”.</p>
+<blockquote>
+<p>Advantage of “extends”:<br>Allow subclasses to reuse code from an already defined class.</p>
+</blockquote>
+<h3 id="How-to-define-this-inheritace-relationship-in-the-class-header"><a href="#How-to-define-this-inheritace-relationship-in-the-class-header" class="headerlink" title="How to define this inheritace relationship in the class header:"></a>How to define this inheritace relationship in the class header:</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>	<span class="class"><span class="keyword">class</span>	<span class="title">RotatingSLList</span>&lt;<span class="title">Item</span>&gt;	<span class="keyword">extends</span>	<span class="title">SLList</span>&lt;<span class="title">Item</span>&gt;</span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>By using thie keyword”extends” the subclass RotatingSLList<Item> get a special relationship called “is a” mit it’s superclass SLList so that RotatingSLList can use member and metheod which are not privat in SLList.<br>Besides that we can make modification by using “Overriding” and add additional functionality to our subclass”RotatingSLList”.</Item></p>
+</blockquote>
+<h3 id="What-can-subclass-exactly-get-from-it’s-superclass-by-using-keyword”extends”"><a href="#What-can-subclass-exactly-get-from-it’s-superclass-by-using-keyword”extends”" class="headerlink" title="What can subclass exactly get from it’s superclass by using keyword”extends”"></a>What can subclass exactly get from it’s superclass by using keyword”extends”</h3><p>subclass inherit all <strong><em>members</em></strong> of the parent class.<br>“Members” includes:</p>
+<ul>
+<li>All instance and static variables</li>
+<li>All menthods</li>
+<li>All nested calsses</li>
+</ul>
+<blockquote>
+<p>Note: Constructors are not inherited,Privat members cannot be directly accessed by subclasses(indirectly use privat member of parent class by using keyword”super”).</p>
+</blockquote>
+<blockquote>
+<p>keyword “super” means that we bypass the child class and use the parent class directly to call any members in parent class regardless of keyword”private”</p>
+</blockquote>
+<p>For Example:<br>We want to create a new class called “VengefulSLList”,that remembers all items that have been destroyed by method “removeLast”</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VengefulSLList</span>&lt;<span class="title">Item</span>&gt; <span class="keyword">extends</span> <span class="title">SLList</span>&lt;<span class="title">Item</span>&gt;</span>&#123;</span><br><span class="line">        SLList&lt;Item&gt; deletedItems; <span class="comment">//define a new list to store items which are deleted by removeLast()</span></span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">VengefulSLList</span><span class="params">()</span></span>&#123;</span><br><span class="line">          deletedItems = <span class="keyword">new</span> SLList&lt;Item&gt;();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Item <span class="title">removeLast</span><span class="params">()</span></span>&#123;</span><br><span class="line">          Item x = <span class="keyword">super</span>.removeLast(); <span class="comment">//use keyword"super" to call privat method in Sllist</span></span><br><span class="line">          deletedItems.addLast(x);</span><br><span class="line">          <span class="keyword">return</span> x;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">         <span class="comment">/**	Prints	deleted	items.	*/</span></span><br><span class="line">        	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printLostItems</span><span class="params">()</span></span>&#123;								deletedItems.print();</span><br><span class="line">          &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>We can also instantiate the class’s member <strong>*”deletedItems”*</strong> directly in class without using Constructor.(可以在42 行直接实例化deletedItems)</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SLList</span>	&lt;<span class="title">Item</span>&gt; <span class="keyword">implements</span> <span class="title">List61B</span>&lt;<span class="title">Item</span>&gt;</span>&#123;</span><br><span class="line">  <span class="comment">//Nested class</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">IntNode</span></span>&#123; <span class="comment">//anyone outsids the class can't access inside.anyone inside can't access outside too</span></span><br><span class="line">    <span class="keyword">public</span> Item item;</span><br><span class="line">    <span class="keyword">public</span> IntNode next;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="title">IntNode</span><span class="params">(Item i,IntNode n)</span></span>&#123;</span><br><span class="line">      item=i;</span><br><span class="line">      next=n;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">private</span> IntNode sentinel;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> size;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//empty list</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">SLList</span><span class="params">()</span>	</span>&#123;</span><br><span class="line">     sentinel= <span class="keyword">new</span> IntNode(<span class="keyword">null</span>,<span class="keyword">null</span>);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">SLList</span><span class="params">(Item x)</span>	</span>&#123;</span><br><span class="line">     size++;</span><br><span class="line">     sentinel= <span class="keyword">new</span> IntNode(<span class="keyword">null</span>,<span class="keyword">null</span>);</span><br><span class="line">     sentinel.next= <span class="keyword">new</span>	IntNode(x,<span class="keyword">null</span>);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addFirt</span><span class="params">(Item i)</span></span>&#123;</span><br><span class="line">   size++;</span><br><span class="line">   sentinel.next=<span class="keyword">new</span> Intnode(i, sentinel.next)</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">public</span> Item <span class="title">getFirst</span><span class="params">()</span></span>&#123;</span><br><span class="line">     <span class="keyword">return</span> sentinel.next.item;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//iteration</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addlast</span><span class="params">(Item i)</span></span>&#123;</span><br><span class="line">     size++;</span><br><span class="line">     Intnode p =sentinel;</span><br><span class="line">     <span class="keyword">while</span>(p.next !=<span class="keyword">null</span>)&#123;</span><br><span class="line">       p=p.next;</span><br><span class="line">     &#125;</span><br><span class="line">     p.next=<span class="keyword">new</span> IntNode(i,<span class="keyword">null</span>); <span class="comment">// note that the lastnode of a list always points to "null"</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//recursion</span></span><br><span class="line"></span><br><span class="line">   <span class="comment">//so called helper Metheod that help us to get the lastnode of a List start with the Node P</span></span><br><span class="line">  <span class="function"><span class="keyword">private</span> IntNode <span class="title">getLastNode</span><span class="params">(IntNode p)</span></span>&#123;</span><br><span class="line">     <span class="keyword">if</span>(p.next==<span class="keyword">null</span>)  <span class="comment">//basic case</span></span><br><span class="line">       <span class="keyword">return</span> p;</span><br><span class="line">     <span class="keyword">return</span> getLastNode(p.next);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addlast</span><span class="params">(Item i)</span></span>&#123;</span><br><span class="line">     IntNode last=getlastNode(sentinel);</span><br><span class="line">     last.next=<span class="keyword">new</span> IntNode(i,<span class="keyword">null</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function">pubulic <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>&#123;</span><br><span class="line">     <span class="keyword">return</span> size;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     <span class="keyword">for</span>(Node p=sentinel.next;p!=<span class="keyword">null</span>;p=p.next)&#123;</span><br><span class="line">       System.out.print(p.item+<span class="string">"	"</span>);</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>实现泛型，仅在最外面class处进行声明“<Generic>” 之后将list 中的相关的普通类型比如“int” 换成“Generic” 即可</Generic></p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">List61B</span>&lt;<span class="title">Item</span>&gt;</span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addFirst</span><span class="params">(Item x)</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addLast</span><span class="params">(Item y)</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Item <span class="title">getFirst</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Item <span class="title">getLast</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Item <span class="title">removeLast</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Item <span class="title">get</span><span class="params">(<span class="keyword">int</span> i)</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(Item x,<span class="keyword">int</span> position)</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">default</span> <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>	(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;size();i+=<span class="number">1</span>)&#123;</span><br><span class="line">    System.out.print(get(i)+<span class="string">"	"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Constructors-are-not-inherited"><a href="#Constructors-are-not-inherited" class="headerlink" title="Constructors are not inherited"></a>Constructors are not inherited</h3><p>While Constructors are not inherited,java requires that all constructors ***must start with a call to one of its superclass’s constructors.Befor the constructors instantiate/initialize all is’t supperclass,it will not initialize it’s members which are only/new difined in it’s own.</p>
+<p>Thus,we can eiter explicity make a call to the superclass’s constructor,using the super keyword:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">VengefulSLList</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">super</span>();</span><br><span class="line">  deletedItems=<span class="keyword">new</span> Sllist&lt;Item&gt;(); <span class="comment">//</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Or ,if we choose not to,java will automatically make a call to the superclass’s no argument constructor for us.</p>
+<p>If we were to define another constructor in VengefulSLList,java’s implicit call may not be what we intend to call.<br>For Example in this cass we must explicity to make a call to the superclass’special constructor which has parameter “Item x”</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">VengefulSLList</span><span class="params">(Intem x)</span></span>&#123;</span><br><span class="line">  <span class="keyword">super</span>(x);</span><br><span class="line">  deletedItems=<span class="keyword">new</span> Sllist&lt;Item&gt;(); <span class="comment">//</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="The-Object-class"><a href="#The-Object-class" class="headerlink" title="The Object class"></a>The Object class</h3><p>Every class in Java is a descendant(后代) of the Object class,or <strong><em>extends</em></strong> the Object class.Even classes that do not have an explicit <strong><em>extends</em></strong> in there class. That’s means that the class still implicitly extend the Object class.This approach let all class have some commen methods such as eqeals(),hashCode(),toString(). This commen metheds let our life more easier.</p>
+<blockquote>
+<p>interface doesn’t extend Object method</p>
+</blockquote>
+<p>###Is-a    vs.    Has-a<br>Important    Note:    The        extends        keyword    defines    “is-a”,    or    hypernymic    relationships.A common mistake is to instead    use    it    for    “has-a”,    or    meronymic    relationships.<br>When    extending    a    class, a wise    thing    to    do    would    be    to    ask    yourself    if the    “is-a”    relationship makes    sense.</p>
+<ul>
+<li>Shower is    a    Bathroom?    No!</li>
+<li>VengefulSLList is a    SLList?    Yes!</li>
+</ul>
+<p>###Encapsulation</p>
+<h4 id="Some-of-the-tools-we-can-use-to-fight-complexity"><a href="#Some-of-the-tools-we-can-use-to-fight-complexity" class="headerlink" title="Some    of    the    tools    we    can    use    to    fight    complexity"></a>Some    of    the    tools    we    can    use    to    fight    complexity</h4><ul>
+<li>hierarchical    abstraction    (abstraction barriers!) by using interface inheritace/extends</li>
+<li>Design    for    change:programs    should    be    built    into    modular,    interchangeable    pieces    that    can    be    swapped    around without    breaking    the    system</li>
+<li>hiding    information    that    others    don’t    need(Encapsulation)</li>
+</ul>
+<p>In    computer    science    terms,    a    module    can    be    defined    as    a    set    of    methods    that    work    together as    a    whole    to    perform    a    task    or    set    of    related    tasks.    This    could    be    something    like    a    class    that represents    a    list.    Now,    if    the    implementation    details    of    a    module    are    kept    internally    hidden and    the    only    way    to    interact    with    it    is    through    a    documented    interface,    then    that    module    is said    to    be    encapsulated.</p>
+<img alt="cs-61b-Extends-Casting-Higher-Order-Functions-Capture1.PNG" src="/.com//cs-61b-Extends-Casting-Higher-Order-Functions-Capture1.PNG" width height>
+
+<p>Take    the        ArrayDeque        class,    for    example.    The    outside    world    is    able    to    utilize    and    interact    with an        ArrayDeque        through    its    defined    methods,    like        addLast        and        removeLast    .    However,    they need    not    understand    the    complex    details    of    how    the    data    structure    was    implemented    in order    to    be    able    to    use    it    effectively.</p>
+<h4 id="Abstraction-Barriers"><a href="#Abstraction-Barriers" class="headerlink" title="Abstraction Barriers"></a>Abstraction Barriers</h4><p>By using the keyword “private” we can ensure that the inside of a box(Encapsulation/封装) can’t been seen.This approach help us to reduce the complexity of reusing a code.</p>
+<h4 id="How-Inheritance-Breaks-Encapsulation"><a href="#How-Inheritance-Breaks-Encapsulation" class="headerlink" title="How Inheritance Breaks Encapsulation"></a>How Inheritance Breaks Encapsulation</h4><p>Suppose    we    had    the    following    two    methods    in    a    Dog    class.    We    could    have    implemented    bark        and        barkMany        like    so:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">bark</span><span class="params">()</span></span>&#123;</span><br><span class="line">  System.out.println(<span class="string">"bark"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">barkMany</span><span class="params">(<span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;N;i+=<span class="number">1</span>)&#123;</span><br><span class="line">      bark();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Or,    alternatively,    we    could    have    implemented    it    like    so:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">bark</span><span class="params">()</span></span>&#123;</span><br><span class="line">  barkMany(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">barkMany</span><span class="params">(<span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;N;i+=<span class="number">1</span>)&#123;</span><br><span class="line">  System.out.println(<span class="string">"bark"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>From    a    user’s    perspective,    the    functionality    of    either    of    these    implementations    is    exactly    the same.    However,    observe    the    effect    if    we    were    to    define    a    a    subclass    of        Dog        called    VerboseDog    ,    and    override    its        barkMany        method    as    such:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">barkMany</span><span class="params">(<span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">  System.out.println(<span class="string">"As a dog,I say:"</span>);</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;N;i+=<span class="number">1</span>)&#123;</span><br><span class="line">      bark();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Given    a    VerboseDog vd    ,what    would        vd.barkMany(3)        output,    given    the first    implementation    above?    The    second    implementation?</p>
+<ul>
+<li>a:    As    a    dog,    I    say:    bark    bark    bark</li>
+<li>b:    bark    bark    bark</li>
+<li>c:    Something    else</li>
+</ul>
+<p>As    we    have    seen,    using    the    first    implementation,    the    output    is    A,    while    using    the    second implementation,    the    program    gets    caught    in    an    infinite    loop.    The    call    to        bark()        will    call    barkMany(1)    ,    which    makes    a    call    to        bark()    ,    repeating    the    process    infinitely    many    times,the reason of this is that the both dynamic and static type of Object vd are  VerboseDog,so when we call use vd to call a metheds,vd will check first whether this method is overriding in itself,if so,it will use the overrided methed in itself instead of using the original methode in it’s parrent class.</p>
+<h3 id="Type-Checking-and-Casting"><a href="#Type-Checking-and-Casting" class="headerlink" title="Type    Checking    and    Casting"></a>Type    Checking    and    Casting</h3><h4 id="Dynamic-method-selection"><a href="#Dynamic-method-selection" class="headerlink" title="Dynamic    method    selection"></a>Dynamic    method    selection</h4><p>Recall    that dynamic    method    lookup    is    the    process    of    determining    the    method    that    is    executed    at    runtime based    on    the    dynamic    type    of    the    object.    Specifically,    if    a    method    in    SLList    is    overridden    by the    VengefulSLList    class,    then    the    method    that    is    called    at    runtime    is    determined    by    the    runtime    type,    or    dynamic    type,    of    that    variable.</p>
+<blockquote>
+<p>runtime type means dynamic types<br>compile type means static types</p>
+</blockquote>
+<p><img src="/.com//Capture2.PNG" alt="Capture2"></p>
+<p>Let’s    go    through    this    program.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">VengefulSLList&lt;Integer&gt; vsl=<span class="keyword">new</span> VengefulSLList&lt;Integer&gt;(<span class="number">9</span>);</span><br><span class="line">SLList&lt;Integer&gt;	sl=vsl;</span><br></pre></td></tr></table></figure>
+<p>These    two    lines    above    compile    just    fine.    Since        VengefulSLList        “is-an”    SLList,    it’s    valid    to put    an    instance    of    the        VengefulSLList        class    inside    an        SLList        “container”</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sl.addLast(<span class="number">50</span>);</span><br><span class="line">sl.removeLast();</span><br></pre></td></tr></table></figure>
+<p>These    lines    above    also    compile.    The    call    to        addLast        is    unambiguous,    as    VengefulSLList    did not    override    or    implement    it,    so    the    method    executed    is    in    SLList.    The        removeLast        method is    overridden    by    VengefulSLList,    however,    so    we    take    a    look    at    the    dynamic    type    of        sl    .    Its dynamic    type    is    VengefulSLList,    and    so    dynamic    method    selection    chooses    the    overridden method    in    the    VengefulSLList    class.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sl.printLostItems();</span><br></pre></td></tr></table></figure>
+<p>This    line    above    results    in    a    compile-time    error.    Remember    that    the    compiler    determines whether    or    not    something    is    valid    based    on    the    static    type    of    the    object.    Since        sl        is    of static    type    SLList,    and        printLostItems        is    not    defined    in    the    SLList    class,    the    code    will    not    be allowed    to    run,    even    though        sl    ‘s    runtime    type    is    VengefulSLList</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VengefulSLList&lt;Integer&gt;	vsl2	=	sl;</span><br></pre></td></tr></table></figure>
+<p>This    line    above    also    results    in    a    compile-time    error,    for    a    similar    reason.    In    general,    the compiler    only    allows    method    calls    and    assignments    based    on    compile-time    types.    Since    the compiler    only    sees    that    the    static    type    of        sl        is    SLList,    it    will    not    allow    a    VengefulSLList “container”    to    hold    it.</p>
+<h4 id="Expressions"><a href="#Expressions" class="headerlink" title="Expressions"></a>Expressions</h4><p>Like    variables    as    seen    above,    expressions    using    the        new        keyword    also    have    (static type)compile-time types.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SLList&lt;Integer&gt; sl=<span class="keyword">new</span> VengefulSLList&lt;Integer&gt;();</span><br></pre></td></tr></table></figure>
+<p>Above,    the    compile-time    type    of    the    right-hand    side    of    the    expression    is    VengefulSLList.    The compiler    checks    to    make    sure    that    VengefulSLList    “is-a”    SLList,    and    allows    this    assignment,</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VengefulSLList&lt;Integer&gt; vsl=<span class="keyword">new</span> SLList&lt;Integer&gt;();</span><br></pre></td></tr></table></figure>
+<p>Above,    the    compile-time    type    of    the    right-hand    side    of    the    expression    is    SLList.    The    compiler checks    if    SLList    “is-a”    VengefulSLList,    which    it    is    not    in    all    cases,    and    thus    a    compilation error    results.<br>Further,    method    calls    have    compile-time    types    equal    to    their    declared    type.    Suppose    we have    this    method:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Dog <span class="title">maxDog</span><span class="params">(Dog d1,Dog d2)</span></span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<p>Since    the    return    type    of        maxDog        is    Dog,    any    call    to        maxDog        will    have    compile-time    type    Dog.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Poodle frank=<span class="keyword">new</span> Poodle(<span class="string">"Frank"</span>,<span class="number">5</span>);</span><br><span class="line">Poodle frankJr=<span class="keyword">new</span> Poodle(<span class="string">"Frank Jr."</span>,<span class="number">15</span>);</span><br><span class="line">Dog largerDog=maxDog(frank,frankJr);</span><br><span class="line">Poodle largerPoodle=maxDog(frank,frankJr);<span class="comment">//does not compile! RHS has compile-time type Dog</span></span><br></pre></td></tr></table></figure>
+<p>Assigning    a    Dog    object    to    a    Poodle    variable,    like    in    the    SLList    case,    results    in    a    compilation error.    A    Poodle    “is-a”    Dog,    but    a    more    general    Dog    object    may    not    always    be    a    Poodle,    even if    it    clearly    is    to    you    and    me    (we    know    that        frank        and        frankJr        are    both    Poodles!).    Is    there any    way    around    this,    when    we    know    for    certain    that    assignment    would    work?</p>
+<h4 id="Casting"><a href="#Casting" class="headerlink" title="Casting"></a>Casting</h4><p>Java    has    a    special    syntax    where    you    can    tell    the    compiler    that    a    specific    expression    has    a specific    compile-time    type.    This    is    called    “casting”.    With    casting,    we    can    tell    the    compiler    to view    an    expression    as    a    different    (static type)compile-time    type.</p>
+<p>Looking    back    at    the    code    that    failed    above,    since    we    know    that        frank        and        frankJr        are both    Poodles,    we    can    cast:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Poodle largerPoodle=(Poodle)maxDog(frank,frankJr);<span class="comment">//compiles!Right hand side has compile-time type Poodle after casting</span></span><br></pre></td></tr></table></figure>
+
+<p>Caution:    Casting    is    a    powerful    but    dangerous    tool.    Essentially,    casting    is    telling    the    compiler not    to    do    its    type-checking    duties    -    telling    it    to    trust    you    and    act    the    way    you    want    it    to.    Here’s a    possible    issue    that    could    arise:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Poodle frank=<span class="keyword">new</span> Poodle(<span class="string">"Frank"</span>,<span class="number">5</span>);</span><br><span class="line">Malamute frankSr=<span class="keyword">new</span> Malamute(<span class="string">"Frank Sr."</span>, <span class="number">100</span>); <span class="comment">//另外一个狗的类</span></span><br><span class="line">Poodle largerPoodle=(Poodle) maxDog(frank,frankSr);	<span class="comment">//runtime exception!</span></span><br></pre></td></tr></table></figure>
+<p>In    this    case,    we    compare    a    Poodle    and    a    Malamute.    Without    casting,    the    compiler    would normally    not    allow    the    call    to        maxDog        to    compile,    as    the    right    hand    side    compile-time    type would    be    Dog,    not    Poodle.    However,    casting    allows    this    code    to    pass,    and    when        maxDog    returns    the    Malamute    at    runtime,    and    we    try    casting    a    Malamute    as    a    Poodle,    we    run    into    a runtime    exception    -    a        ClassCastException    .</p>
+<h3 id="Higher-Order-Functions"><a href="#Higher-Order-Functions" class="headerlink" title="Higher    Order    Functions"></a>Higher    Order    Functions</h3><p>Taking    a    little    bit    of    a    detour,    we    are    going    to    introduce    higher    order    functions.    A    higher    order function    is    a    function    that    treats    other    functions    as    data. For example in phython:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def tenX(x):</span><br><span class="line">return 10*x</span><br><span class="line">def do_twice(f,x):</span><br><span class="line">return f(f(x))</span><br></pre></td></tr></table></figure>
+<p>A    call    to        print(do_twice(tenX,    2))        would    apply    tenX    to    2,    and    apply    tenX    again    to    its    result, 20,    resulting    in    200.</p>
+<p>How    would    we    do    something    like    this    in    Java?</p>
+<p>In    old    school    Java    (Java    7    and    earlier),    memory    boxes    (variables)    could    not    contain    pointers to    functions.    What    that    means    is    that    we    could    not    write    a    function    that    has    a    “Function” type,    as    there    was    simply    no    type    for    functions.<br>To    get    around    this    we    can    take    advantage    of    interface    inheritance.    Let’s    write    an    interface that    defines    any    function    that    takes    in    an    integer    and    returns    an    integer    -    an    IntUnaryFunction</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IntUnaryFunction</span></span>&#123;</span><br><span class="line">  	<span class="function"><span class="keyword">int</span> <span class="title">apply</span><span class="params">(<span class="keyword">int</span> x)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Now    we    can    write    a    class    which        implements    IntUnaryFunction        to    represent    a    concrete function.    Let’s    make    a    function    that    takes    in    an    integer    and    returns    10    times    that    integer.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TenX</span> <span class="keyword">implements</span> <span class="title">IntUnaryFunction</span></span>&#123;</span><br><span class="line"><span class="comment">/*	Returns ten times the argument.	*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">apply</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">10</span>*x;</span><br><span class="line">  	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>##Inheritance    Cheatsheet</p>
+<p>Variables,    methods    nested    classes Not    constructors    Subclass    constructors    must    invoke    superclass    constructor    first.    The    super        keyword    can    be    used    to    invoke    overridden    superclass    methods    and constructors.</p>
+<p>Invocation    of    overridden    methods    follows    two    simple    rules:</p>
+<ul>
+<li>Compiler    plays    it    safe    and    only    allows    us    to    do    things    according    to    the    static    type.</li>
+<li>For    overridden    methods    (not    overloaded    methods),    the    actual    method    invoked    is    based on    the    dynamic    type    of    the    invoking    expression</li>
+<li>Can    use    casting    to    overrule    compiler    type    checking.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="Yaoxin Jing WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># java学习笔记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/09/cs-61b-4-1-Interface-and-Implementation-Inheritance/" rel="prev" title="cs 61b 4.1 Interface and Implementation Inheritance">
+      <i class="fa fa-chevron-left"></i> cs 61b 4.1 Interface and Implementation Inheritance
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/10/CS-61b-4-3-Subtype-Polynorphism-vs-Hofs/" rel="next" title="CS 61b 4.3 Subtype Polynorphism vs Hofs">
+      CS 61b 4.3 Subtype Polynorphism vs Hofs <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Extends-Casting-Higher-Order"><span class="nav-number">1.</span> <span class="nav-text">Extends Casting Higher Order</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Extends"><span class="nav-number">1.1.</span> <span class="nav-text">Extends</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Why-we-need-“Extends”-instead-of-always-using-keyword-”implements”"><span class="nav-number">1.1.1.</span> <span class="nav-text">Why we need “Extends” instead of always using keyword *”implements”*</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#How-to-define-this-inheritace-relationship-in-the-class-header"><span class="nav-number">1.1.2.</span> <span class="nav-text">How to define this inheritace relationship in the class header:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#What-can-subclass-exactly-get-from-it’s-superclass-by-using-keyword”extends”"><span class="nav-number">1.1.3.</span> <span class="nav-text">What can subclass exactly get from it’s superclass by using keyword”extends”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Constructors-are-not-inherited"><span class="nav-number">1.1.4.</span> <span class="nav-text">Constructors are not inherited</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Object-class"><span class="nav-number">1.1.5.</span> <span class="nav-text">The Object class</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Some-of-the-tools-we-can-use-to-fight-complexity"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">Some    of    the    tools    we    can    use    to    fight    complexity</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Abstraction-Barriers"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">Abstraction Barriers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#How-Inheritance-Breaks-Encapsulation"><span class="nav-number">1.1.5.3.</span> <span class="nav-text">How Inheritance Breaks Encapsulation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Type-Checking-and-Casting"><span class="nav-number">1.1.6.</span> <span class="nav-text">Type    Checking    and    Casting</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Dynamic-method-selection"><span class="nav-number">1.1.6.1.</span> <span class="nav-text">Dynamic    method    selection</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Expressions"><span class="nav-number">1.1.6.2.</span> <span class="nav-text">Expressions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Casting"><span class="nav-number">1.1.6.3.</span> <span class="nav-text">Casting</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Higher-Order-Functions"><span class="nav-number">1.1.7.</span> <span class="nav-text">Higher    Order    Functions</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yaoxin Jing"
+      src="/images/avatar1.jpg">
+  <p class="site-author-name" itemprop="name">Yaoxin Jing</p>
+  <div class="site-description" itemprop="description">人生苦短，我学Java</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yaoxinjing" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yaoxinjing" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yaoxinjing@gmail.com" title="E-Mail → mailto:yaoxinjing@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/3170488771" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3170488771" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yaoxin jing</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script type="text/javascript" color="0,0,0" opacity='0.5' zIndex="-1" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
