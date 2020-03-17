@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="cs 61b Disjoint SetsDefination of Disjoint SetsTwo    sets    are    named    disjoint    sets    if    they    have    no    elements    in    common.    A    Disjoint-Sets    (or Union-Find)    data">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cs 61b Disjoint Sets">
+<meta property="og:url" content="http://yoursite.com/2020/03/16/cs-61b-Disjoint-Sets/index.html">
+<meta property="og:site_name" content="正经星人のBOKE">
+<meta property="og:description" content="cs 61b Disjoint SetsDefination of Disjoint SetsTwo    sets    are    named    disjoint    sets    if    they    have    no    elements    in    common.    A    Disjoint-Sets    (or Union-Find)    data">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/.com//Capture7.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//cs-61b-Disjoint-Sets-Capture7.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//Capture8.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//cs-61b-Disjoint-Sets-Capture8.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//Capture9.JPG">
+<meta property="og:image" content="http://yoursite.com/.com//cs-61b-Disjoint-Sets-Capture9.JPG">
+<meta property="article:published_time" content="2020-03-16T04:37:33.000Z">
+<meta property="article:modified_time" content="2020-03-16T06:27:53.422Z">
+<meta property="article:author" content="Yaoxin Jing">
+<meta property="article:tag" content="algorithmus">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/.com//Capture7.PNG">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/16/cs-61b-Disjoint-Sets/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>cs 61b Disjoint Sets | 正经星人のBOKE</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">正经星人のBOKE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">学僧一枚</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/16/cs-61b-Disjoint-Sets/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+      <meta itemprop="name" content="Yaoxin Jing">
+      <meta itemprop="description" content="人生苦短，我学Java">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正经星人のBOKE">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          cs 61b Disjoint Sets
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-03-16 05:37:33 / Modified: 07:27:53" itemprop="dateCreated datePublished" datetime="2020-03-16T05:37:33+01:00">2020-03-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-cs61b/" itemprop="url" rel="index"><span itemprop="name">算法学习笔记-cs61b</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="cs-61b-Disjoint-Sets"><a href="#cs-61b-Disjoint-Sets" class="headerlink" title="cs 61b Disjoint Sets"></a>cs 61b Disjoint Sets</h1><h2 id="Defination-of-Disjoint-Sets"><a href="#Defination-of-Disjoint-Sets" class="headerlink" title="Defination of Disjoint Sets"></a>Defination of Disjoint Sets</h2><p>Two    sets    are    named    disjoint    sets    if    they    have    no    elements    in    common.    A    Disjoint-Sets    (or Union-Find)    data    structure    keeps    track    of    a    fixed    number    of    elements    partitioned    into    a number    of    disjoint    sets（持续追踪分布在一定数量下的disjoint sets 中的固定数量的元素）.    The    data    structure    has    two    operations:</p>
+<ul>
+<li>connect(x,    y)    :    connect        x        and        y    .    Also    known    as        union</li>
+<li>isConnected(x,    y)    :    returns    true    if        x        and        y        are    connected    (i.e.    part    of    the    same    set).</li>
+</ul>
+<blockquote>
+<p>A    Disjoint    Sets    data    structure    has    a    fixed    number    of    elements    that    each    start    out    in    their    own subset.    By    calling        connect(x,    y)        for    some    elements        x        and        y    ,    we    merge    subsets together.(合并两个集合）</p>
+</blockquote>
+<h3 id="Defination-of-Disjoint-sets-interface"><a href="#Defination-of-Disjoint-sets-interface" class="headerlink" title="Defination of Disjoint sets interface"></a>Defination of Disjoint sets interface</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">DisjointSets</span></span>&#123;</span><br><span class="line"><span class="comment">/** connects two items P and Q	*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">connect</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span></span>;</span><br><span class="line"><span class="comment">/**checks to see if two items are connected */</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span>	<span class="title">isConnected</span><span class="params">(<span class="keyword">int</span>	p, <span class="keyword">int</span> q)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>As    a reminder,    an    interface    determines    what    behaviors    a    data    structure    should    have    (but    not    how to    accomplish    it)</p>
+</blockquote>
+<blockquote>
+<p>   We    will    discuss    four iterations    of    a    Disjoint    Sets    design    before    being    satisfied:    Quick    Find    →    Quick    Union    → Weighted    Quick    Union    (WQU)    →    WQU    with    Path    Compression.</p>
+</blockquote>
+<h2 id="Quick-Find-using-a-single-array-of-integers"><a href="#Quick-Find-using-a-single-array-of-integers" class="headerlink" title="Quick    Find(using    a    single    array    of    integers.)"></a>Quick    Find(using    a    single    array    of    integers.)</h2><ul>
+<li>The    indices    of    the    array    represent    the    elements    of    our    set.</li>
+<li>The    value    at    an    index    is    the    set    number    it    belongs    to.</li>
+</ul>
+<blockquote>
+<p>可以通用数组很快找到两个元素是否在一个集合，所以交quick find（ Θ(1)）</p>
+</blockquote>
+<p>For    example,    we    represent        {0,    1,    2,    4},    {3,    5},    {6}        as:</p>
+<p><img src="/.com//Capture7.PNG" alt="Capture7"><img alt="cs-61b-Disjoint-Sets-Capture7.PNG" src="/.com//cs-61b-Disjoint-Sets-Capture7.PNG" width height></p>
+<p>The    array    indices    (0…6)    are    the    elements.    The    value    at        id[i]        is    the    set    it    belongs    to.    The specific    set    number    doesn’t    matter    as    long    as    all    elements    in    the    same    set    share    the    same id.</p>
+<p><strong><em>connect(x,    y)：</em></strong><br>Let’s    see    how    the    connect    operation    would    work.    Right    now,        id[2]    =    4        and        id[3]    =    5    . After    calling        connect(2,    3)    ,    all    the    elements    with    id    4    and    5    should    have    the    same    id.    Let’s assign    them    all    the    value    5    for    now:</p>
+<p>  <img src="/.com//Capture8.PNG" alt="Capture8"><img alt="cs-61b-Disjoint-Sets-Capture8.PNG" src="/.com//cs-61b-Disjoint-Sets-Capture8.PNG" width height></p>
+<p><strong>*    isConnected(x,    y)：*</strong><br>To    check        isConnected(x,    y)    ,    we    simply    check    if        id[x]    ==    id[y]    .    Note    this    is    a    constant time    operation!<br>We    call    this    implementation    “Quick    Find”    because    finding    if    elements    are    connected    takes constant    time.</p>
+<p>Summary    and    Code</p>
+<table>
+<thead>
+<tr>
+<th>Implementation</th>
+<th>Constructor</th>
+<th>connect</th>
+<th>isConnected</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ListOfSets</td>
+<td>Θ(N)</td>
+<td>Θ(N)</td>
+<td>Θ(N)</td>
+</tr>
+<tr>
+<td>QuickFind</td>
+<td>Θ(N)</td>
+<td>Θ(N)</td>
+<td>Θ(1)</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *  @author Robert Sedgewick</span></span><br><span class="line"><span class="comment"> *  @author Kevin Wayne</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuickFindUF</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] id;    <span class="comment">// id[i] = component identifier of i</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> count;   <span class="comment">// number of components</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Initializes an empty union-find data structure with</span></span><br><span class="line"><span class="comment">     * &#123;<span class="doctag">@code</span> n&#125; elements &#123;<span class="doctag">@code</span> 0&#125; through &#123;<span class="doctag">@code</span> n-1&#125;.</span></span><br><span class="line"><span class="comment">     * Initially, each elements is in its own set.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  n the number of elements</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IllegalArgumentException if &#123;<span class="doctag">@code</span> n &lt; 0&#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">QuickFindUF</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        count = n;</span><br><span class="line">        id = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">            id[i] = i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Returns the number of sets.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the number of sets (between &#123;<span class="doctag">@code</span> 1&#125; and &#123;<span class="doctag">@code</span> n&#125;)</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">count</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Returns the canonical element of the set containing element &#123;<span class="doctag">@code</span> p&#125;.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  p an element</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the canonical element of the set containing &#123;<span class="doctag">@code</span> p&#125;</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IllegalArgumentException unless &#123;<span class="doctag">@code</span> 0 &lt;= p &lt; n&#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">        validate(p);</span><br><span class="line">        <span class="keyword">return</span> id[p];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// validate that p is a valid index</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">validate</span><span class="params">(<span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = id.length;</span><br><span class="line">        <span class="keyword">if</span> (p &lt; <span class="number">0</span> || p &gt;= n) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"index "</span> + p + <span class="string">" is not between 0 and "</span> + (n-<span class="number">1</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Returns true if the two elements are in the same set.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  p one element</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  q the other element</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> &#123;<span class="doctag">@code</span> true&#125; if &#123;<span class="doctag">@code</span> p&#125; and &#123;<span class="doctag">@code</span> q&#125; are in the same set;</span></span><br><span class="line"><span class="comment">     *         &#123;<span class="doctag">@code</span> false&#125; otherwise</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IllegalArgumentException unless</span></span><br><span class="line"><span class="comment">     *         both &#123;<span class="doctag">@code</span> 0 &lt;= p &lt; n&#125; and &#123;<span class="doctag">@code</span> 0 &lt;= q &lt; n&#125;</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@deprecated</span> Replace with two calls to &#123;<span class="doctag">@link</span> #find(int)&#125;.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Deprecated</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">connected</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span> </span>&#123;</span><br><span class="line">        validate(p);</span><br><span class="line">        validate(q);</span><br><span class="line">        <span class="keyword">return</span> id[p] == id[q];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Merges the set containing element &#123;<span class="doctag">@code</span> p&#125; with the</span></span><br><span class="line"><span class="comment">     * the set containing element &#123;<span class="doctag">@code</span> q&#125;.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  p one element</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  q the other element</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IllegalArgumentException unless</span></span><br><span class="line"><span class="comment">     *         both &#123;<span class="doctag">@code</span> 0 &lt;= p &lt; n&#125; and &#123;<span class="doctag">@code</span> 0 &lt;= q &lt; n&#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">union</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span> </span>&#123;</span><br><span class="line">        validate(p);</span><br><span class="line">        validate(q);</span><br><span class="line">        <span class="keyword">int</span> pID = id[p];   <span class="comment">// needed for correctness</span></span><br><span class="line">        <span class="keyword">int</span> qID = id[q];   <span class="comment">// to reduce the number of array accesses</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// p and q are already in the same component</span></span><br><span class="line">        <span class="keyword">if</span> (pID == qID) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; id.length; i++)</span><br><span class="line">            <span class="keyword">if</span> (id[i] == pID) id[i] = qID;</span><br><span class="line">        count--;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Reads an integer &#123;<span class="doctag">@code</span> n&#125; and a sequence of pairs of integers</span></span><br><span class="line"><span class="comment">     * (between &#123;<span class="doctag">@code</span> 0&#125; and &#123;<span class="doctag">@code</span> n-1&#125;) from standard input, where each integer</span></span><br><span class="line"><span class="comment">     * in the pair represents some element;</span></span><br><span class="line"><span class="comment">     * if the elements are in different sets, merge the two sets</span></span><br><span class="line"><span class="comment">     * and print the pair to standard output.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> args the command-line arguments</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = StdIn.readInt();</span><br><span class="line">        QuickFindUF uf = <span class="keyword">new</span> QuickFindUF(n);</span><br><span class="line">        <span class="keyword">while</span> (!StdIn.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">int</span> p = StdIn.readInt();</span><br><span class="line">            <span class="keyword">int</span> q = StdIn.readInt();</span><br><span class="line">            <span class="keyword">if</span> (uf.find(p) == uf.find(q)) <span class="keyword">continue</span>;</span><br><span class="line">            uf.union(p, q);</span><br><span class="line">            StdOut.println(p + <span class="string">" "</span> + q);</span><br><span class="line">        &#125;</span><br><span class="line">        StdOut.println(uf.count() + <span class="string">" components"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Quick-Union"><a href="#Quick-Union" class="headerlink" title="Quick    Union"></a>Quick    Union</h2><p>Suppose    we    prioritize    making    the        connect        operation    fast.    We    will    still    represent    our    sets with    an    array.    Instead    of    an    id,    we    assign    each    item    the    index    of    its    parent.    If    an    item    has    no parent,    then    it    is    a    ‘root’    and    we    assign    it    a    negative    value.</p>
+<p>This    approach    allows    us    to    imagine    each    of    our    sets    as    a    tree.    For    example,    we    represent    {0,    1,    2,    4},    {3,    5},    {6}        as:</p>
+<p><img src="/.com//Capture9.JPG" alt="Capture9"><img alt="cs-61b-Disjoint-Sets-Capture9.JPG" src="/.com//cs-61b-Disjoint-Sets-Capture9.JPG" width height></p>
+<blockquote>
+<p>For    QuickUnion    we    define    a    helper    function        find(int    item)        which    returns    the    root    of    the tree        item        is    in.</p>
+</blockquote>
+<p><strong><em>connect(x,    y)</em></strong><br>To    connect    two    items,    we    find    the    set    that    each    item    belongs    to    (the    roots    of    their    respective trees),    and    make    one    the    child    of    the    other.（分别找到x ，y 所属的树的根节点（root）将其中一个根节点连接到另一个树根节点，使两个树合二为一）</p>
+<p><strong><em>isConnected(x,    y)</em></strong><br>If    two    elements    are    part    of    the    same    set,    then    they    will    be    in    the    same    tree.    Thus,    they    will have    the    same    root.    So    for        isConnected(x,    y)        we    simply    check    if        find(x)    ==    find(y)    .</p>
+<p><strong><em>Performance</em></strong><br>There    is    a    potential    performance    issue    with    QuickUnion:    the    tree    can    become    very    long.    In this    case,    finding    the    root    of    an    item    (    find(item)    )    becomes    very    expensive.</p>
+<p>In    the    worst    case,    we    have    to    traverse    all    the    items    to    get    to    the    root,    which    is    a    Θ(N) runtime.    Since    we    have    to    call        find        for    both        connect        and        isConnected    ,    the    runtime    for both    is    upper    bounded    by    O(N).</p>
+<p><strong><em>Summary    and    Code</em></strong></p>
+<table>
+<thead>
+<tr>
+<th>Implementation</th>
+<th>Constructor</th>
+<th>connect</th>
+<th>isConnected</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ListOfSets</td>
+<td>Θ(N)</td>
+<td>Θ(N)</td>
+<td>Θ(N)</td>
+</tr>
+<tr>
+<td>QuickFind</td>
+<td>Θ(N)</td>
+<td>Θ(N)</td>
+<td>Θ(1)</td>
+</tr>
+<tr>
+<td>QuickUnion</td>
+<td>Θ(N)</td>
+<td>O(N)</td>
+<td>O(N)</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Initializes an empty union-find data structure with</span></span><br><span class="line"><span class="comment">     * &#123;<span class="doctag">@code</span> n&#125; elements &#123;<span class="doctag">@code</span> 0&#125; through &#123;<span class="doctag">@code</span> n-1&#125;.</span></span><br><span class="line"><span class="comment">     * Initially, each elements is in its own set.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  n the number of elements</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IllegalArgumentException if &#123;<span class="doctag">@code</span> n &lt; 0&#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">QuickUnionUF</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        parent = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        count = n;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            parent[i] = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Returns the number of sets.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the number of sets (between &#123;<span class="doctag">@code</span> 1&#125; and &#123;<span class="doctag">@code</span> n&#125;)</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">count</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Returns the canonical element of the set containing element &#123;<span class="doctag">@code</span> p&#125;.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  p an element</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the canonical element of the set containing &#123;<span class="doctag">@code</span> p&#125;</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IllegalArgumentException unless &#123;<span class="doctag">@code</span> 0 &lt;= p &lt; n&#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">        validate(p);</span><br><span class="line">        <span class="keyword">while</span> (p != parent[p])</span><br><span class="line">            p = parent[p];</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// validate that p is a valid index</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">validate</span><span class="params">(<span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = parent.length;</span><br><span class="line">        <span class="keyword">if</span> (p &lt; <span class="number">0</span> || p &gt;= n) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"index "</span> + p + <span class="string">" is not between 0 and "</span> + (n-<span class="number">1</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Returns true if the two elements are in the same set.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  p one element</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  q the other element</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> &#123;<span class="doctag">@code</span> true&#125; if &#123;<span class="doctag">@code</span> p&#125; and &#123;<span class="doctag">@code</span> q&#125; are in the same set;</span></span><br><span class="line"><span class="comment">     *         &#123;<span class="doctag">@code</span> false&#125; otherwise</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IllegalArgumentException unless</span></span><br><span class="line"><span class="comment">     *         both &#123;<span class="doctag">@code</span> 0 &lt;= p &lt; n&#125; and &#123;<span class="doctag">@code</span> 0 &lt;= q &lt; n&#125;</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@deprecated</span> Replace with two calls to &#123;<span class="doctag">@link</span> #find(int)&#125;.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Deprecated</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">connected</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> find(p) == find(q);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Merges the set containing element &#123;<span class="doctag">@code</span> p&#125; with the</span></span><br><span class="line"><span class="comment">     * the set containing element &#123;<span class="doctag">@code</span> q&#125;.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  p one element</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  q the other element</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IllegalArgumentException unless</span></span><br><span class="line"><span class="comment">     *         both &#123;<span class="doctag">@code</span> 0 &lt;= p &lt; n&#125; and &#123;<span class="doctag">@code</span> 0 &lt;= q &lt; n&#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">union</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> rootP = find(p);</span><br><span class="line">        <span class="keyword">int</span> rootQ = find(q);</span><br><span class="line">        <span class="keyword">if</span> (rootP == rootQ) <span class="keyword">return</span>;</span><br><span class="line">        parent[rootP] = rootQ;</span><br><span class="line">        count--;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Reads an integer &#123;<span class="doctag">@code</span> n&#125; and a sequence of pairs of integers</span></span><br><span class="line"><span class="comment">     * (between &#123;<span class="doctag">@code</span> 0&#125; and &#123;<span class="doctag">@code</span> n-1&#125;) from standard input, where each integer</span></span><br><span class="line"><span class="comment">     * in the pair represents some element;</span></span><br><span class="line"><span class="comment">     * if the elements are in different sets, merge the two sets</span></span><br><span class="line"><span class="comment">     * and print the pair to standard output.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> args the command-line arguments</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = StdIn.readInt();</span><br><span class="line">        QuickUnionUF uf = <span class="keyword">new</span> QuickUnionUF(n);</span><br><span class="line">        <span class="keyword">while</span> (!StdIn.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">int</span> p = StdIn.readInt();</span><br><span class="line">            <span class="keyword">int</span> q = StdIn.readInt();</span><br><span class="line">            <span class="keyword">if</span> (uf.find(p) == uf.find(q)) <span class="keyword">continue</span>;</span><br><span class="line">            uf.union(p, q);</span><br><span class="line">            StdOut.println(p + <span class="string">" "</span> + q);</span><br><span class="line">        &#125;</span><br><span class="line">        StdOut.println(uf.count() + <span class="string">" components"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Weighted-Quick-Union-WQU"><a href="#Weighted-Quick-Union-WQU" class="headerlink" title="Weighted    Quick    Union    (WQU)"></a>Weighted    Quick    Union    (WQU)</h2><p>Improving    on    Quick    Union    relies    on    a    key    insight:    whenever    we    call        find    ,    we    have    to    climb to    the    root    of    a    tree.    Thus,    the    shorter    the    tree    the    faster    it    takes!</p>
+<blockquote>
+<p>New    rule:    whenever    we    call        connect    ,    we    always    link    the    root    of    the    smaller    tree    to    the larger    tree.(在合并两个树之前，看哪个树中的元素少，将元素少的树的根节点连接到元素较多的树的根节点，换句话说，将元素较少的树合并到元素较多的树中)</p>
+</blockquote>
+<blockquote>
+<p>Intuition: We    determine    smaller    /    larger    by    the    number    of    items    in    a    tree.    Thus,    when    connecting    two trees    we    need    to    know    their    size    (or    weight).    We    can    store    this    information    in    the    root    of    the tree    by    replacing    the        -1    ‘s    with        -(size    of    tree)    (将树中元素的个数存在根节点中，判断一个节点是否是根节点的标志是，根节点中存储的元素是否为负，为负则为根节点，为正则表示父节点的位置)</p>
+</blockquote>
+<p><strong><em>Maximum    height:    Log    N</em></strong> (以2为底数的对数函数)<br>Following    the    above    rule    ensures    that    the    maximum    height    of    any    tree    is    Θ(log    N).    N    is    the number    of    elements    in    our    Disjoint    Sets.    By    extension,    the    runtimes    of        connect        and    isConnected        are    bounded    by    O(log    N).</p>
+<p>Why    log    N?    The    video    above    presents    a    more    visual    explanation.    Here’s    an    optional mathematical    explanation    why    the    maximum    height    is    log N.    Imagine    any    element    x    in    tree    T1.    The    depth    of    x    increases    by    1    only    when    T1    is    placed    below    another    tree    T2.    When    that happens,    the    size    of    the    resulting    tree    will    be    at    least    double    the    size    of    T1    because    size(T2) ≥ size(T1).    The    tree    with    x    can    double    at    most    log N    times    until    we’ve    reached    a total    of    N    items    (2^log    N = N).    So    we    can    double    up    to    log N    times    and    each    time,    our    tree adds    a    level    →    maximum    log N    levels.</p>
+<blockquote>
+<p>运用Weighted    Quick    Union 的规则，一个树从仅有一个元素增长到拥有N个元素，最多可以增长log    N次，且每次增长高度仅仅增加一，所以最大高度为log    N。最坏的情况是，isConnected（）和 connect（） 函数调用find()时，均从某一个树的最底层向上寻找树的根，且这个书的高度为log    N，所以两个函数的最大运行时间为O(log    N)（O（）表示小于等于log    N）<br>详细解释：slids cs61b 2019 lec14 ds1 disjoint sets 47-55</p>
+</blockquote>
+<p><strong><em>Summary    and    Code</em></strong></p>
+<table>
+<thead>
+<tr>
+<th>Implementation</th>
+<th>Constructor</th>
+<th>connect</th>
+<th>isConnected</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ListOfSets</td>
+<td>Θ(N)</td>
+<td>Θ(N)</td>
+<td>Θ(N)</td>
+</tr>
+<tr>
+<td>QuickFind</td>
+<td>Θ(N)</td>
+<td>Θ(N)</td>
+<td>Θ(1)</td>
+</tr>
+<tr>
+<td>QuickUnion</td>
+<td>Θ(N)</td>
+<td>O(N)</td>
+<td>O(N)</td>
+</tr>
+<tr>
+<td>Weighted    Quick    Union</td>
+<td>Θ(N)</td>
+<td>O(log    N)</td>
+<td>O(log    N)</td>
+</tr>
+</tbody></table>
+<p>Code:</p>
+<h2 id="Weighted-Quick-Union-with-Path-Compression-路径压缩-重置"><a href="#Weighted-Quick-Union-with-Path-Compression-路径压缩-重置" class="headerlink" title="Weighted    Quick    Union    with    Path    Compression(路径压缩/重置)"></a>Weighted    Quick    Union    with    Path    Compression(路径压缩/重置)</h2><p>The    clever    insight    is    realizing    that    whenever    we    call        find(x)        we    have    to    traverse    the    path from        x        to    root.    So,    along    the    way    we    can    connect    all    the    items    we    visit    to    their    root    at    no extra    asymptotic    cost.<br>Connecting    all    the    items    along    the    way    to    the    root    will    help    make    our    tree    shorter    with    each call    to        find    .</p>
+<blockquote>
+<p>在运行find()寻找根节点的同时，将所有路过的几点记下来并在找到根节点之后将这些节点挂在根节点上，大幅降低寻找根节点所花费的时间。</p>
+</blockquote>
+<p>Recall    that    both        connect(x,    y)        and        isConnected(x,    y)        always    call        find(x)        and    find(y)    .    Thus,    after    calling        connect        or        isConnected        enough,    essentially    all    elements    will point    directly    to    their    root.</p>
+<p> By    extension,    the    average    runtime    of        connect        and        isConnected        becomes    almost    constant in    the    long    term!    This    is    called    the    amortized    runtime.</p>
+<p>More    specifically,    for    M    operations    on    N    elements,    WQU    with    Path    Compression    is    in    O(N    + M    (lg*    N)).    lg*    is    the    iterated    logarithm    which    is    less    than    5    for    any    real-world    input</p>
+<p>Code：Lab 6</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><table>
+<thead>
+<tr>
+<th>Implementation</th>
+<th>Constructor</th>
+<th>connect</th>
+<th>isConnected</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ListOfSets</td>
+<td>Θ(N)</td>
+<td>Θ(N)</td>
+<td>Θ(N)</td>
+</tr>
+<tr>
+<td>QuickFind</td>
+<td>Θ(N)</td>
+<td>Θ(N)</td>
+<td>Θ(1)</td>
+</tr>
+<tr>
+<td>QuickUnion</td>
+<td>Θ(N)</td>
+<td>O(N)</td>
+<td>O(N)</td>
+</tr>
+<tr>
+<td>Weighted    Quick    Union</td>
+<td>Θ(N)</td>
+<td>O(log    N)</td>
+<td>O(log    N)</td>
+</tr>
+<tr>
+<td>WQU    with    Path    Compression</td>
+<td>Θ(N)</td>
+<td>O(α(N))*</td>
+<td>O(α(N))*</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>N:    number    of    elements    in    Disjoint    Set<br>O(α(N))* ：represent a constant.</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="Yaoxin Jing WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/algorithmus/" rel="tag"># algorithmus</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/15/cs-61b-13-Asymoptotics-1/" rel="prev" title="cs 61b 13.Asymoptotics 1">
+      <i class="fa fa-chevron-left"></i> cs 61b 13.Asymoptotics 1
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/16/Asymptotics-II/" rel="next" title="Asymptotics II">
+      Asymptotics II <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#cs-61b-Disjoint-Sets"><span class="nav-number">1.</span> <span class="nav-text">cs 61b Disjoint Sets</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Defination-of-Disjoint-Sets"><span class="nav-number">1.1.</span> <span class="nav-text">Defination of Disjoint Sets</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Defination-of-Disjoint-sets-interface"><span class="nav-number">1.1.1.</span> <span class="nav-text">Defination of Disjoint sets interface</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Find-using-a-single-array-of-integers"><span class="nav-number">1.2.</span> <span class="nav-text">Quick    Find(using    a    single    array    of    integers.)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Union"><span class="nav-number">1.3.</span> <span class="nav-text">Quick    Union</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Weighted-Quick-Union-WQU"><span class="nav-number">1.4.</span> <span class="nav-text">Weighted    Quick    Union    (WQU)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Weighted-Quick-Union-with-Path-Compression-路径压缩-重置"><span class="nav-number">1.5.</span> <span class="nav-text">Weighted    Quick    Union    with    Path    Compression(路径压缩&#x2F;重置)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">1.6.</span> <span class="nav-text">Summary</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yaoxin Jing"
+      src="/images/avatar1.jpg">
+  <p class="site-author-name" itemprop="name">Yaoxin Jing</p>
+  <div class="site-description" itemprop="description">人生苦短，我学Java</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yaoxinjing" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yaoxinjing" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yaoxinjing@gmail.com" title="E-Mail → mailto:yaoxinjing@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/3170488771" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3170488771" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yaoxin jing</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script type="text/javascript" color="0,0,0" opacity='0.5' zIndex="-1" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>

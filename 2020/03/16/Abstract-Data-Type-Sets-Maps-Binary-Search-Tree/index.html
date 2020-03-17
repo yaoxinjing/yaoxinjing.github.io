@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Abstract Data Type,Sets,Maps,Binary Search Tree Abstract Data Types Binary Search Tree (intro) BST Definitions BST Operations Sets vs. Maps, Summary  Abstract Data Types(interface)An    Abstract    Da">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Abstract Data Type,Sets,Maps,Binary Search Tree">
+<meta property="og:url" content="http://yoursite.com/2020/03/16/Abstract-Data-Type-Sets-Maps-Binary-Search-Tree/index.html">
+<meta property="og:site_name" content="正经星人のBOKE">
+<meta property="og:description" content="Abstract Data Type,Sets,Maps,Binary Search Tree Abstract Data Types Binary Search Tree (intro) BST Definitions BST Operations Sets vs. Maps, Summary  Abstract Data Types(interface)An    Abstract    Da">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/.com//Capture12.JPG">
+<meta property="og:image" content="http://yoursite.com/.com//Abstract-Data-Type-Sets-Maps-Binary-Search-Tree-Capture12.JPG">
+<meta property="og:image" content="http://yoursite.com/.com//Capture13.JPG">
+<meta property="og:image" content="http://yoursite.com/.com//Abstract-Data-Type-Sets-Maps-Binary-Search-Tree-Capture13.JPG">
+<meta property="og:image" content="http://yoursite.com/.com//Capture14.JPG">
+<meta property="og:image" content="http://yoursite.com/.com//Abstract-Data-Type-Sets-Maps-Binary-Search-Tree-Capture14.JPG">
+<meta property="article:published_time" content="2020-03-16T15:14:34.000Z">
+<meta property="article:modified_time" content="2020-03-16T17:44:47.745Z">
+<meta property="article:author" content="Yaoxin Jing">
+<meta property="article:tag" content="Algorithmus">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/.com//Capture12.JPG">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/16/Abstract-Data-Type-Sets-Maps-Binary-Search-Tree/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>Abstract Data Type,Sets,Maps,Binary Search Tree | 正经星人のBOKE</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">正经星人のBOKE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">学僧一枚</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/16/Abstract-Data-Type-Sets-Maps-Binary-Search-Tree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+      <meta itemprop="name" content="Yaoxin Jing">
+      <meta itemprop="description" content="人生苦短，我学Java">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正经星人のBOKE">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Abstract Data Type,Sets,Maps,Binary Search Tree
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-03-16 16:14:34 / Modified: 18:44:47" itemprop="dateCreated datePublished" datetime="2020-03-16T16:14:34+01:00">2020-03-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-cs61b/" itemprop="url" rel="index"><span itemprop="name">算法学习笔记-cs61b</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Abstract-Data-Type-Sets-Maps-Binary-Search-Tree"><a href="#Abstract-Data-Type-Sets-Maps-Binary-Search-Tree" class="headerlink" title="Abstract Data Type,Sets,Maps,Binary Search Tree"></a>Abstract Data Type,Sets,Maps,Binary Search Tree</h1><ul>
+<li>Abstract Data Types</li>
+<li>Binary Search Tree (intro)</li>
+<li>BST Definitions</li>
+<li>BST Operations</li>
+<li>Sets vs. Maps, Summary</li>
+</ul>
+<h2 id="Abstract-Data-Types-interface"><a href="#Abstract-Data-Types-interface" class="headerlink" title="Abstract Data Types(interface)"></a>Abstract Data Types(interface)</h2><p>An    Abstract    Data    Type    (ADT)    is    defined    only    by    its    operations,    not    by    its    implementation.    For example    in    proj1a,    we    developed    an    ArrayDeque    and    a    LinkedListDeque    that    had    the    same methods,    but    how    those    methods    were    written    was    very    different.    In    this    case,    we    say    that ArrayDeque    and    LinkedListDeque    are    implementations    of    the    Deque    ADT.    From    this description,    we    see    that    ADT’s    and    interfaces    are    somewhat    related.    Conceptually,    Deque    is an    interface    for    which    ArrayDeque    and    LinkedListDeque    are    its    implementations.    In    code,    in order    to    express    this    relationship,    we    have    the    ArrayDeque    and    LinkedListDeque    classes inherit    from    the    Deque    interface.</p>
+<h3 id="Deque-ADT-interface"><a href="#Deque-ADT-interface" class="headerlink" title="Deque ADT(interface):"></a>Deque ADT(interface):</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">addFirst(Item x);</span><br><span class="line">addLast(Item x);</span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>;</span><br><span class="line">printDeque();</span><br><span class="line"><span class="function">Item <span class="title">removeFirst</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function">Item <span class="title">removeLast</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function">Item <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span></span>;</span><br></pre></td></tr></table></figure>
+<p><img src="/.com//Capture12.JPG" alt="Capture12"><img alt="Abstract-Data-Type-Sets-Maps-Binary-Search-Tree-Capture12.JPG" src="/.com//Abstract-Data-Type-Sets-Maps-Binary-Search-Tree-Capture12.JPG" width height></p>
+<h3 id="Another-example-of-an-ADT-The-Stack"><a href="#Another-example-of-an-ADT-The-Stack" class="headerlink" title="Another example of an ADT: The Stack"></a>Another example of an ADT: The Stack</h3><p>The Stack ADT supports the following operations:</p>
+<ul>
+<li>push(int x): Puts x on top of the stack.</li>
+<li>int pop(): Removes and returns the top item from the stack.</li>
+</ul>
+<h3 id="The-GrabBag-ADT"><a href="#The-GrabBag-ADT" class="headerlink" title="The GrabBag ADT:"></a>The GrabBag ADT:</h3><p>The GrabBag ADT supports the following operations:</p>
+<ul>
+<li>insert(int x): Inserts x into the grab bag.</li>
+<li>int remove(): Removes a random item from the bag.</li>
+<li>int sample(): Samples a random item from the bag (without removing!)</li>
+<li>int size(): Number of items in the bag.</li>
+</ul>
+<h3 id="Abstract-Data-Types-in-Java"><a href="#Abstract-Data-Types-in-Java" class="headerlink" title="Abstract Data Types in Java"></a>Abstract Data Types in Java</h3><p>Among the most important interfaces in the java.util library are those that extend the Collection interface (btw interfaces can extend other interfaces).</p>
+<ul>
+<li>Lists:    an    ordered    set    of    elements<ul>
+<li>add(int    i)    :    adds    an    element</li>
+<li>int    get(int    i)    :    gets    element    at    index    i</li>
+</ul>
+</li>
+<li>Sets:    an    unordered    set    of    unique    elements    (no    repeats)<ul>
+<li>add(int    i)    :    adds    an    element</li>
+<li>contains(int    i)    :    returns    a    boolean    for    whether    or    not    the    set    contains    the    value</li>
+</ul>
+</li>
+<li>Maps:    set    of    key/value    pairs<ul>
+<li>put(K    key,    V    value)    :    puts    a    key    value    pair    into    the    map</li>
+<li>V    get(K    key)    :    gets    the    value    corresponding    to    the    key</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Note: Interfaces in Java aren’t purely abstract as(因为) they can contain some implementation details, e.g. default methods.</p>
+</blockquote>
+<h2 id="Binary-Search-Trees（-binary-search-for-a-linked-list）"><a href="#Binary-Search-Trees（-binary-search-for-a-linked-list）" class="headerlink" title="Binary Search Trees（    binary    search    for    a    linked    list）"></a>Binary Search Trees（    binary    search    for    a    linked    list）</h2><h3 id="Properties-of-trees"><a href="#Properties-of-trees" class="headerlink" title="Properties    of    trees"></a>Properties    of    trees</h3><h4 id="trees"><a href="#trees" class="headerlink" title="trees"></a>trees</h4><p>A tree consists of:</p>
+<ul>
+<li>A set of nodes.</li>
+<li>A set of edges that connect those nodes.<ul>
+<li>Constraint(规定): There is exactly one path between any two nodes.（任意两个树中的节点A和B，只有一条路径可以从A到达B,该路径中可能包含多个中间节点）</li>
+</ul>
+</li>
+</ul>
+<h4 id="Binary-Trees"><a href="#Binary-Trees" class="headerlink" title="Binary    Trees:"></a>Binary    Trees:</h4><p>in    addition    to    the    above    requirements,    also    hold    the    binary    property constraint.    That    is,    each    node    has    either    0,    1,    or    2    children.</p>
+<h4 id="Binary-Search-Trees"><a href="#Binary-Search-Trees" class="headerlink" title="Binary    Search    Trees:"></a>Binary    Search    Trees:</h4><p>in    addition    to    all    of    the    above    requirements,    also    hold    the property    that    For    every    node    X    in    the    tree:</p>
+<ul>
+<li>Every    key    in    the    left    subtree    is    less    than    X’s    key.</li>
+<li>Every    key    in    the    right    subtree    is    greater    than    X’s    key.    **Remember    this    property!! We    will    reference    it    a    lot    throughout    the    duration    of    this    module    and    61B.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">BST</span>&lt;<span class="title">Key</span>&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Key key;</span><br><span class="line">    <span class="keyword">private</span> BST left;</span><br><span class="line">    <span class="keyword">private</span> BST right;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BST</span><span class="params">(Key key,BST left,BST Right)</span></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.key=key;</span><br><span class="line">    <span class="keyword">this</span>.left=left;</span><br><span class="line">    <span class="keyword">this</span>.right=right;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BST</span><span class="params">(Key key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.key=key;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Binary-Search-Tree-Operations"><a href="#Binary-Search-Tree-Operations" class="headerlink" title="Binary    Search    Tree    Operations"></a>Binary    Search    Tree    Operations</h3><h4 id="Search"><a href="#Search" class="headerlink" title="Search"></a>Search</h4><p>We    know    that    the    BST    is    structured    such    that    all    elements    to    the    right    of    a    node    are    greater and    all    elements    to    the    left    are    smaller.    Knowing    this,    we    can    start    at    the    root    node    and compare    it    with    the    element,    X,    that    we    are    looking    for.    If    X    is    greater    to    the    root,    we    move on    to    the    root’s    right    child.    If    its    smaller,    we    move    on    to    the    root’s    left    child.    We    repeat    this process    recursively    until    we    either    find    the    item    or    we    get    to    a    leaf    in    which    case    the    tree does    not    contain    the    item.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> BST <span class="title">find</span><span class="params">(BST T, Key sk)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (T == <span class="keyword">null</span>)</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">   <span class="keyword">if</span> (sk.equals(T.key))</span><br><span class="line">      <span class="keyword">return</span> T;</span><br><span class="line">   <span class="keyword">else</span> <span class="keyword">if</span> (sk ≺ T.key)</span><br><span class="line">      <span class="keyword">return</span> find(T.left, sk);</span><br><span class="line">   <span class="keyword">else</span></span><br><span class="line">      <span class="keyword">return</span> find(T.right, sk);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>If    our    tree    is    relatively    “bushy”,    the    find    operation    will    run    in    log(n)    time    because    the    height    of the    tree    is    logn,    that’s    pretty    fast!(最大运行时间是从root搜索到leaf,因为树的高度是log(n),所以最大搜索时间也是log(n))</p>
+</blockquote>
+<h4 id="Insert"><a href="#Insert" class="headerlink" title="Insert"></a>Insert</h4><p>First,    we    search    in    the    tree    for    the    node.    If    we    find    it,    then    we    don’t    do    anything.    If    we    don’t find    it,    we    will    be    at    a    leaf    node    already.    At    this    point,    we    can    just    add    the    new    element    to either    the    left    or    right    of    the    leaf,    preserving(保持)    the    BST    property.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> BST <span class="title">insert</span><span class="params">(BST T, Key ik)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (T == <span class="keyword">null</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> BST(ik);</span><br><span class="line">  <span class="keyword">if</span> (ik ≺ T.key)</span><br><span class="line">    T.left = insert(T.left, ik);</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (ik ≻ T.key)</span><br><span class="line">    T.right = insert(T.right, ik);</span><br><span class="line">  <span class="keyword">return</span> T;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h4><p>Deleting    from    a    binary    tree    is    a    little    bit    more    complicated    because    whenever    we    delete,    we need    to    make    sure    we    reconstruct    the    tree    and    still    maintain    its    BST    property.<br>Let’s    break    this    problem    down    into    three    categories:</p>
+<ul>
+<li>the    node    we    are    trying    to    delete    has    no    children</li>
+<li>has    1    child</li>
+<li>has    2    children</li>
+</ul>
+<h5 id="No-children"><a href="#No-children" class="headerlink" title="No    children"></a>No    children</h5><p>If    the    node    has    no    children,    it    is    a    leaf,    and    we    can    just    delete    its    parent    pointer    and    the    node will    eventually    be    swept    away    by    the    garbage    collector</p>
+<h5 id="One-child"><a href="#One-child" class="headerlink" title="One    child"></a>One    child</h5><p>If    the    node    only    has    one    child,    we    know    that    the    child    maintains    the    BST    property    with    the parent    of    the    node    because    the    property    is    recursive    to    the    right    and    left    subtrees.    Therefore, we    can    just    reassign    the    parent’s    child    pointer    to    the    node’s    child    and    the    node    will eventually    be    garbage    collected.<br><img src="/.com//Capture13.JPG" alt="Capture13"><img alt="Abstract-Data-Type-Sets-Maps-Binary-Search-Tree-Capture13.JPG" src="/.com//Abstract-Data-Type-Sets-Maps-Binary-Search-Tree-Capture13.JPG" width height></p>
+<blockquote>
+<p>删除仅有一个子节点的节点A，将节点A的父节点的指向A的指针指向A的孩子节点即可</p>
+</blockquote>
+<h5 id="Two-children"><a href="#Two-children" class="headerlink" title="Two    children"></a>Two    children</h5><p>If    the    node    has    two    children,    the    process    becomes    a    little    more    complicated    because    we can’t    just    assign    one    of    the    children    to    be    the    new    root.    This    might    break    the    BST    property.<br>Instead,    we    choose    a    new    node    to    replace    the    deleted    one. We    know    that    the    new    node    must:</p>
+<ul>
+<li>be    &gt;    than    everything    in    left    subtree.</li>
+<li>be    &lt;    than    everything    right    subtree.</li>
+</ul>
+<p>In    the    below    tree,    we    show    which    nodes    would    satisfy    these    requirements    given    that    we    are trying    to    delete    the        dog        node.</p>
+<p><img src="/.com//Capture14.JPG" alt="Capture14"><img alt="Abstract-Data-Type-Sets-Maps-Binary-Search-Tree-Capture14.JPG" src="/.com//Abstract-Data-Type-Sets-Maps-Binary-Search-Tree-Capture14.JPG" width height></p>
+<blockquote>
+<p>Cat 是dog 的predecessor ,elf 则是dog 的successor，要删除某一节点，我们只要找到这个节点的的predecessor 或 successor，并将其放在被删除节点的位置即可。</p>
+</blockquote>
+<blockquote>
+<p>Binary search tree 中没有重复节点。<br>To    find    these    nodes,    you    can    just    take    the    right-most    node    in    the    left    subtree    or    the    left-most node    in    the    right    subtree.<br>Then,    we    replace    the        dog        node    with    either        cat        or        elf        and    then    remove    the    old        cat        or    elf        node. This    is    called    Hibbard    deletion,    and    it    gloriously    maintains    the    BST    property    amidst    a deletion.</p>
+</blockquote>
+<h2 id="BSTs-as-Sets-and-Maps"><a href="#BSTs-as-Sets-and-Maps" class="headerlink" title="BSTs    as    Sets    and    Maps"></a>BSTs    as    Sets    and    Maps</h2><p>We    can    use    a    BST    to    implement    the        Set        ADT!    But    its    even    better    because    in    an    ArraySet, we    have    worst-case    O(n)    runtime    to    run        contains        because    we    need    to    search    the    entire set.    However,    if    we    use    a    BST,    we    can    decrease    this    runtime    to    log(n)    because    of    the    BST property    which    enables    us    to    use    binary    search! We    can    also    make    a    binary    tree    into    a    map    by    having    each    BST    node    hold        (key,value)    pairs    instead    of    singular    values.    We    will    compare    each    element’s    key    in    order    to    determine where    to    place    it    within    our    tree.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>Abstract    data    types    (ADTs)    are    defined    in    terms    of    operations,    not    implementation.<br>Several    useful    ADTs:</p>
+<ul>
+<li>Disjoint    Sets,    Map,    Set,    List.</li>
+<li>Java    provides    Map,    Set,    List    interfaces,    along    with    several    implementations. We’ve    seen    two    ways    to    implement    a    Set    (or    Map):</li>
+<li>ArraySet:    Θ(N)    operations    in    the    worst    case.（search an item in set）</li>
+<li>BST:    Θ(logN)    operations    if    tree    is    balanced.(search an item in set)<br>BST    Implementations:</li>
+<li>Search    and    insert    are    straightforward    (but    insert    is    a    little    tricky).</li>
+<li>Deletion    is    more    challenging.    Typical    approach    is    “Hibbard    deletion”.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="Yaoxin Jing WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Algorithmus/" rel="tag"># Algorithmus</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/16/Asymptotics-II/" rel="prev" title="Asymptotics II">
+      <i class="fa fa-chevron-left"></i> Asymptotics II
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/17/java-%E8%AF%AD%E6%B3%95%E5%B0%8F%E7%9F%A5%E8%AF%86/" rel="next" title="java 语法小知识">
+      java 语法小知识 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract-Data-Type-Sets-Maps-Binary-Search-Tree"><span class="nav-number">1.</span> <span class="nav-text">Abstract Data Type,Sets,Maps,Binary Search Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract-Data-Types-interface"><span class="nav-number">1.1.</span> <span class="nav-text">Abstract Data Types(interface)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Deque-ADT-interface"><span class="nav-number">1.1.1.</span> <span class="nav-text">Deque ADT(interface):</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Another-example-of-an-ADT-The-Stack"><span class="nav-number">1.1.2.</span> <span class="nav-text">Another example of an ADT: The Stack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-GrabBag-ADT"><span class="nav-number">1.1.3.</span> <span class="nav-text">The GrabBag ADT:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstract-Data-Types-in-Java"><span class="nav-number">1.1.4.</span> <span class="nav-text">Abstract Data Types in Java</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Search-Trees（-binary-search-for-a-linked-list）"><span class="nav-number">1.2.</span> <span class="nav-text">Binary Search Trees（    binary    search    for    a    linked    list）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Properties-of-trees"><span class="nav-number">1.2.1.</span> <span class="nav-text">Properties    of    trees</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#trees"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">trees</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Binary-Trees"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">Binary    Trees:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Binary-Search-Trees"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">Binary    Search    Trees:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Binary-Search-Tree-Operations"><span class="nav-number">1.2.2.</span> <span class="nav-text">Binary    Search    Tree    Operations</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Search"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Search</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Insert"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">Insert</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Delete"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">Delete</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#No-children"><span class="nav-number">1.2.2.3.1.</span> <span class="nav-text">No    children</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#One-child"><span class="nav-number">1.2.2.3.2.</span> <span class="nav-text">One    child</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Two-children"><span class="nav-number">1.2.2.3.3.</span> <span class="nav-text">Two    children</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BSTs-as-Sets-and-Maps"><span class="nav-number">1.3.</span> <span class="nav-text">BSTs    as    Sets    and    Maps</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">1.4.</span> <span class="nav-text">Summary</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yaoxin Jing"
+      src="/images/avatar1.jpg">
+  <p class="site-author-name" itemprop="name">Yaoxin Jing</p>
+  <div class="site-description" itemprop="description">人生苦短，我学Java</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yaoxinjing" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yaoxinjing" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yaoxinjing@gmail.com" title="E-Mail → mailto:yaoxinjing@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/3170488771" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3170488771" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yaoxin jing</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script type="text/javascript" color="0,0,0" opacity='0.5' zIndex="-1" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
