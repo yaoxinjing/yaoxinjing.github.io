@@ -27,14 +27,14 @@
 <meta property="og:site_name" content="正经星人のBOKE">
 <meta property="og:description" content="Extends Casting Higher OrderExtendsWhy we need “Extends” instead of always using keyword *”implements”*As we know the Keyword implement a hieraichical relationship with interface(interface to interfac">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://yaoxinjing.github.io/.io//cs-61b-Extends-Casting-Higher-Order-Functions-Capture1.PNG">
-<meta property="og:image" content="https://yaoxinjing.github.io/.io//Capture2.PNG">
+<meta property="og:image" content="https://yaoxinjing.github.io/2020/03/09/cs-61b-Extends-Casting-Higher-Order-Functions/cs-61b-Extends-Casting-Higher-Order-Functions-Capture1.PNG">
+<meta property="og:image" content="https://yaoxinjing.github.io/assets/Capture2.PNG">
 <meta property="article:published_time" content="2020-03-09T14:24:15.000Z">
 <meta property="article:modified_time" content="2020-03-11T17:22:19.567Z">
 <meta property="article:author" content="Yaoxin Jing">
 <meta property="article:tag" content="java学习笔记">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://yaoxinjing.github.io/.io//cs-61b-Extends-Casting-Higher-Order-Functions-Capture1.PNG">
+<meta name="twitter:image" content="https://yaoxinjing.github.io/2020/03/09/cs-61b-Extends-Casting-Higher-Order-Functions/cs-61b-Extends-Casting-Higher-Order-Functions-Capture1.PNG">
 
 <link rel="canonical" href="https://yaoxinjing.github.io/2020/03/09/cs-61b-Extends-Casting-Higher-Order-Functions/">
 
@@ -276,7 +276,7 @@
 <li>hiding    information    that    others    don’t    need(Encapsulation)</li>
 </ul>
 <p>In    computer    science    terms,    a    module    can    be    defined    as    a    set    of    methods    that    work    together as    a    whole    to    perform    a    task    or    set    of    related    tasks.    This    could    be    something    like    a    class    that represents    a    list.    Now,    if    the    implementation    details    of    a    module    are    kept    internally    hidden and    the    only    way    to    interact    with    it    is    through    a    documented    interface,    then    that    module    is said    to    be    encapsulated.</p>
-<img alt="cs-61b-Extends-Casting-Higher-Order-Functions-Capture1.PNG" src="/.io//cs-61b-Extends-Casting-Higher-Order-Functions-Capture1.PNG" width height>
+<img alt="cs-61b-Extends-Casting-Higher-Order-Functions-Capture1.PNG" src="/2020/03/09/cs-61b-Extends-Casting-Higher-Order-Functions/cs-61b-Extends-Casting-Higher-Order-Functions-Capture1.PNG" width height>
 
 <p>Take    the        ArrayDeque        class,    for    example.    The    outside    world    is    able    to    utilize    and    interact    with an        ArrayDeque        through    its    defined    methods,    like        addLast        and        removeLast    .    However,    they need    not    understand    the    complex    details    of    how    the    data    structure    was    implemented    in order    to    be    able    to    use    it    effectively.</p>
 <h4 id="Abstraction-Barriers"><a href="#Abstraction-Barriers" class="headerlink" title="Abstraction Barriers"></a>Abstraction Barriers</h4><p>By using the keyword “private” we can ensure that the inside of a box(Encapsulation/封装) can’t been seen.This approach help us to reduce the complexity of reusing a code.</p>
@@ -297,7 +297,7 @@
 <blockquote>
 <p>runtime type means dynamic types<br>compile type means static types</p>
 </blockquote>
-<p><img src="/.io//Capture2.PNG" alt="Capture2"></p>
+<p><img src="/assets/Capture2.PNG" alt="Capture2"></p>
 <p>Let’s    go    through    this    program.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">VengefulSLList&lt;Integer&gt; vsl=<span class="keyword">new</span> VengefulSLList&lt;Integer&gt;(<span class="number">9</span>);</span><br><span class="line">SLList&lt;Integer&gt;	sl=vsl;</span><br></pre></td></tr></table></figure>
 <p>These    two    lines    above    compile    just    fine.    Since        VengefulSLList        “is-an”    SLList,    it’s    valid    to put    an    instance    of    the        VengefulSLList        class    inside    an        SLList        “container”</p>

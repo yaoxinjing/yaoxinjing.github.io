@@ -27,16 +27,16 @@
 <meta property="og:site_name" content="正经星人のBOKE">
 <meta property="og:description" content="4.3 Subtype Polynorphism vs HofsReview the dynamic type checkingThe Rules Compiler allows memory box to hold any Subtype Compuler allows calls based on static type(wenn we use a object variable to cal">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://yaoxinjing.github.io/.io//Capture4.PNG">
-<meta property="og:image" content="https://yaoxinjing.github.io/.io//CS-61b-4-3-Subtype-Polynorphism-vs-Hofs-Capture4.PNG">
-<meta property="og:image" content="https://yaoxinjing.github.io/.io//Capture5_cevb69b32.PNG">
-<meta property="og:image" content="https://yaoxinjing.github.io/.io//CS-61b-4-3-Subtype-Polynorphism-vs-Hofs-Capture5.PNG">
+<meta property="og:image" content="https://yaoxinjing.github.io/assets/Capture4.PNG">
+<meta property="og:image" content="https://yaoxinjing.github.io/2020/03/10/CS-61b-4-3-Subtype-Polynorphism-vs-Hofs/CS-61b-4-3-Subtype-Polynorphism-vs-Hofs-Capture4.PNG">
+<meta property="og:image" content="https://yaoxinjing.github.io/assets/Capture5_cevb69b32.PNG">
+<meta property="og:image" content="https://yaoxinjing.github.io/2020/03/10/CS-61b-4-3-Subtype-Polynorphism-vs-Hofs/CS-61b-4-3-Subtype-Polynorphism-vs-Hofs-Capture5.PNG">
 <meta property="article:published_time" content="2020-03-10T05:06:34.000Z">
 <meta property="article:modified_time" content="2020-03-17T16:57:53.808Z">
 <meta property="article:author" content="Yaoxin Jing">
 <meta property="article:tag" content="java学习笔记">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://yaoxinjing.github.io/.io//Capture4.PNG">
+<meta name="twitter:image" content="https://yaoxinjing.github.io/assets/Capture4.PNG">
 
 <link rel="canonical" href="https://yaoxinjing.github.io/2020/03/10/CS-61b-4-3-Subtype-Polynorphism-vs-Hofs/">
 
@@ -254,7 +254,7 @@
 <p>The    fundamental    issue    that    gives    rise    to    this    is    that    Objects    cannot    be    compared    with    “&gt;”.</p>
 </blockquote>
 <h3 id="Modification-and-2-Try"><a href="#Modification-and-2-Try" class="headerlink" title="Modification and 2.Try"></a>Modification and 2.Try</h3><p>We    can    create    an    interface    that    guarantees    that    any    implementing    class,    like    Dog,    contains a    comparison    method,    which    we’ll    call        compareTo    .</p>
-<p><img src="/.io//Capture4.PNG" alt="Capture4"><img alt="CS-61b-4-3-Subtype-Polynorphism-vs-Hofs-Capture4.PNG" src="/.io//CS-61b-4-3-Subtype-Polynorphism-vs-Hofs-Capture4.PNG" width height></p>
+<p><img src="/assets/Capture4.PNG" alt="Capture4"><img alt="CS-61b-4-3-Subtype-Polynorphism-vs-Hofs-Capture4.PNG" src="/2020/03/10/CS-61b-4-3-Subtype-Polynorphism-vs-Hofs/CS-61b-4-3-Subtype-Polynorphism-vs-Hofs-Capture4.PNG" width height></p>
 <p>Let’s    write    our    interface.    We’ll    specify    one    method        “compareTo”</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">OurComparable</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Object o)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -315,7 +315,7 @@
 
 <h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>All    in    all,    we    have    a    Dog    class    that    has    a    private    NameComparator    class    and    a    method    that returns    a    NameComparator    we    can    use    to    compare    dogs    alphabetically    by    name.</p>
 <p>Let’s    see    how    everything    works    in    the    inheritance    hierarchy    -    we    have    a    Comparator interface    that’s    built-in    to    Java,    which    we    can    implement    to    define    our    own    Comparators (    NameComparator    ,        SizeComparator    ,    etc.)    within    Dog.</p>
-<p><img src="/.io//Capture5_cevb69b32.PNG" alt="Capture5"><img alt="CS-61b-4-3-Subtype-Polynorphism-vs-Hofs-Capture5.PNG" src="/.io//CS-61b-4-3-Subtype-Polynorphism-vs-Hofs-Capture5.PNG" width height></p>
+<p><img src="/assets/Capture5_cevb69b32.PNG" alt="Capture5"><img alt="CS-61b-4-3-Subtype-Polynorphism-vs-Hofs-Capture5.PNG" src="/2020/03/10/CS-61b-4-3-Subtype-Polynorphism-vs-Hofs/CS-61b-4-3-Subtype-Polynorphism-vs-Hofs-Capture5.PNG" width height></p>
 <p>To    summarize,    interfaces    in    Java    provide    us    with    the    ability    to    make    callbacks.    Sometimes, a    function    needs    the    help    of    another    function    that    might    not    have    been    written    yet    (e.g.        max    needs        compareTo    ).    A    callback    function    is    the    helping    function    (in    the    scenario,        compareTo    ). In    some    languages,    this    is    accomplished    using    explicit    function    passing;    in    Java,    we    wrap the    needed    function    in    an    interface.<br>A    Comparable    says,    “I    want    to    compare    myself    to    another    object”.    It    is    imbedded    within    the object    itself,    and    it    defines    the    natural    ordering    of    a    type.    A    Comparator,    on    the    other    hand, is    more    like    a    third    party    machine    that    compares    two    objects    to    each    other.    Since    there’s only    room    for    one        compareTo        method,    if    we    want    multiple    ways    to    compare,    we    must    turn    to Comparator.</p>
 
     </div>
