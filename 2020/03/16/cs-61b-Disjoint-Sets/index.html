@@ -27,16 +27,16 @@
 <meta property="og:site_name" content="正经星人のBOKE">
 <meta property="og:description" content="cs 61b Disjoint SetsDefination of Disjoint SetsTwo    sets    are    named    disjoint    sets    if    they    have    no    elements    in    common.    A    Disjoint-Sets    (or Union-Find)    data">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://yaoxinjing.github.io/assets/Capture7.PNG">
-<meta property="og:image" content="https://yaoxinjing.github.io/2020/03/16/cs-61b-Disjoint-Sets/cs-61b-Disjoint-Sets-Capture7.PNG">
+<meta property="og:image" content="https://yaoxinjing.github.io/2020/03/16/cs-61b-Disjoint-Sets/Capture7.png">
 <meta property="og:image" content="https://yaoxinjing.github.io/assets/Capture8.PNG">
 <meta property="og:image" content="https://yaoxinjing.github.io/2020/03/16/cs-61b-Disjoint-Sets/cs-61b-Disjoint-Sets-Capture8.PNG">
+<meta property="og:image" content="https://yaoxinjing.github.io/2020/03/16/cs-61b-Disjoint-Sets/Capture9.jpg">
 <meta property="article:published_time" content="2020-03-16T04:37:33.000Z">
-<meta property="article:modified_time" content="2020-03-18T07:17:02.008Z">
+<meta property="article:modified_time" content="2020-03-18T07:32:00.100Z">
 <meta property="article:author" content="Yaoxin Jing">
 <meta property="article:tag" content="Algorithmus">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://yaoxinjing.github.io/assets/Capture7.PNG">
+<meta name="twitter:image" content="https://yaoxinjing.github.io/2020/03/16/cs-61b-Disjoint-Sets/Capture7.png">
 
 <link rel="canonical" href="https://yaoxinjing.github.io/2020/03/16/cs-61b-Disjoint-Sets/">
 
@@ -200,7 +200,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-18 08:17:02" itemprop="dateModified" datetime="2020-03-18T08:17:02+01:00">2020-03-18</time>
+                <time title="Modified: 2020-03-18 08:32:00" itemprop="dateModified" datetime="2020-03-18T08:32:00+01:00">2020-03-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -247,7 +247,7 @@
 <p>可以通用数组很快找到两个元素是否在一个集合，所以交quick find（ Θ(1)）</p>
 </blockquote>
 <p>For    example,    we    represent        {0,    1,    2,    4},    {3,    5},    {6}        as:</p>
-<p><img src="/assets/Capture7.PNG" alt="Capture7"><img alt="cs-61b-Disjoint-Sets-Capture7.PNG" src="/2020/03/16/cs-61b-Disjoint-Sets/cs-61b-Disjoint-Sets-Capture7.PNG" width height></p>
+<p><img src="/2020/03/16/cs-61b-Disjoint-Sets/Capture7.png" alt></p>
 <p>The    array    indices    (0…6)    are    the    elements.    The    value    at        id[i]        is    the    set    it    belongs    to.    The specific    set    number    doesn’t    matter    as    long    as    all    elements    in    the    same    set    share    the    same id.</p>
 <p><strong><em>connect(x,    y)：</em></strong><br>Let’s    see    how    the    connect    operation    would    work.    Right    now,        id[2]    =    4        and        id[3]    =    5    . After    calling        connect(2,    3)    ,    all    the    elements    with    id    4    and    5    should    have    the    same    id.    Let’s assign    them    all    the    value    5    for    now:</p>
 <p>  <img src="/assets/Capture8.PNG" alt="Capture8"><img alt="cs-61b-Disjoint-Sets-Capture8.PNG" src="/2020/03/16/cs-61b-Disjoint-Sets/cs-61b-Disjoint-Sets-Capture8.PNG" width height></p>
@@ -279,10 +279,7 @@
 
 <h2 id="Quick-Union"><a href="#Quick-Union" class="headerlink" title="Quick    Union"></a>Quick    Union</h2><p>Suppose    we    prioritize    making    the        connect        operation    fast.    We    will    still    represent    our    sets with    an    array.    Instead    of    an    id,    we    assign    each    item    the    index    of    its    parent.    If    an    item    has    no parent,    then    it    is    a    ‘root’    and    we    assign    it    a    negative    value.</p>
 <p>This    approach    allows    us    to    imagine    each    of    our    sets    as    a    tree.    For    example,    we    represent    {0,    1,    2,    4},    {3,    5},    {6}        as:</p>
-
-
-
-
+<p><img src="/2020/03/16/cs-61b-Disjoint-Sets/Capture9.jpg" alt></p>
 <blockquote>
 <p>For    QuickUnion    we    define    a    helper    function        find(int    item)        which    returns    the    root    of    the tree        item        is    in.</p>
 </blockquote>
