@@ -27,16 +27,16 @@
 <meta property="og:site_name" content="正经星人のBOKE">
 <meta property="og:description" content="Asymptotics II Examples 1-2: For Loops Example 3: A Basic Recurrence Example 4: Binary Search Example 5: Mergesort  Example 1&#x2F;2:For Loops123456int N &#x3D; A.length;for (int i &#x3D; 0; i &lt; N; i +&#x3D; 1)   for">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://yaoxinjing.github.io/.com//Capture10.JPG">
-<meta property="og:image" content="https://yaoxinjing.github.io/.com//Asymptotics-II-Capture10.JPG">
-<meta property="og:image" content="https://yaoxinjing.github.io/.com//Capture11.JPG">
-<meta property="og:image" content="https://yaoxinjing.github.io/.com//Asymptotics-II-Capture11.JPG">
+<meta property="og:image" content="https://yaoxinjing.github.io/.io//Capture10.JPG">
+<meta property="og:image" content="https://yaoxinjing.github.io/.io//Asymptotics-II-Capture10.JPG">
+<meta property="og:image" content="https://yaoxinjing.github.io/.io//Capture11.JPG">
+<meta property="og:image" content="https://yaoxinjing.github.io/.io//Asymptotics-II-Capture11.JPG">
 <meta property="article:published_time" content="2020-03-16T10:29:08.000Z">
 <meta property="article:modified_time" content="2020-03-16T13:37:56.229Z">
 <meta property="article:author" content="Yaoxin Jing">
 <meta property="article:tag" content="Algorithmus">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://yaoxinjing.github.io/.com//Capture10.JPG">
+<meta name="twitter:image" content="https://yaoxinjing.github.io/.io//Capture10.JPG">
 
 <link rel="canonical" href="https://yaoxinjing.github.io/2020/03/16/Asymptotics-II/">
 
@@ -228,7 +228,7 @@
 <h3 id="Second-Approach"><a href="#Second-Approach" class="headerlink" title="Second Approach"></a>Second Approach</h3><p>Worst case number of == operations:</p>
 <ul>
 <li>Given by area of right triangle of side length N-1.</li>
-<li>Area is Θ(N2).<br><img src="/.com//Capture10.JPG" alt="Capture10"><img alt="Asymptotics-II-Capture10.JPG" src="/.com//Asymptotics-II-Capture10.JPG" width height></li>
+<li>Area is Θ(N2).<br><img src="/.io//Capture10.JPG" alt="Capture10"><img alt="Asymptotics-II-Capture10.JPG" src="/.io//Asymptotics-II-Capture10.JPG" width height></li>
 </ul>
 <table>
 <thead>
@@ -247,7 +247,7 @@
 <h3 id="This-is-not-a-math-class-though-we’ll-expect-you-to-know-these"><a href="#This-is-not-a-math-class-though-we’ll-expect-you-to-know-these" class="headerlink" title="This is not a math class, though we’ll expect you to know these"></a>This is not a math class, though we’ll expect you to know these</h3><p>1 + 2 + 3 + … + Q        = Q(Q+1)/2     = Θ(Q2)<br>1 + 2 + 4 + 8 + … + Q     = 2Q - 1         = Θ(Q)</p>
 <h2 id="Example-3-Tree-Recursion"><a href="#Example-3-Tree-Recursion" class="headerlink" title="Example 3: Tree Recursion"></a>Example 3: Tree Recursion</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">f3</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (n &lt;= <span class="number">1</span>)</span><br><span class="line">      <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">   <span class="keyword">return</span> f3(n-<span class="number">1</span>) + f3(n-<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Count number of calls to f3, given by C(N).<br>C(N) = 1 + 2 + 4 + … + 2^(N-1)<br>Give a simple expression for C(N).<br>C(N) = 2^N - 1(by using 1 + 2 + 4 + 8 + … + Q     = 2Q - 1  )</p>
-<p><img src="/.com//Capture11.JPG" alt="Capture11"><img alt="Asymptotics-II-Capture11.JPG" src="/.com//Asymptotics-II-Capture11.JPG" width height></p>
+<p><img src="/.io//Capture11.JPG" alt="Capture11"><img alt="Asymptotics-II-Capture11.JPG" src="/.io//Asymptotics-II-Capture11.JPG" width height></p>
 <p>Since work during each call is constant:<br>R(N) =  Θ(2N)</p>
 <h2 id="Example-4-Binary-Search"><a href="#Example-4-Binary-Search" class="headerlink" title="Example 4: Binary Search"></a>Example 4: Binary Search</h2><p>Binary    search    is    a    nice    way    of    searching    a    list    for    a    particular    item.    It    requires    the    list    to    be    in sorted    order,    and    uses    that    fact    to    find    an    element    quickly.</p>
 <p>To    do    a    binary    search,    we    start    in    the    middle    of    the    list,    and    check    if    that’s    our    desired element.    If    not,    we    ask:    is    this    element    bigger    or    smaller    than    our    element?</p>

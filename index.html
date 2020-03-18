@@ -290,7 +290,7 @@
 </ul>
 <h2 id="Abstract-Data-Types-interface"><a href="#Abstract-Data-Types-interface" class="headerlink" title="Abstract Data Types(interface)"></a>Abstract Data Types(interface)</h2><p>An    Abstract    Data    Type    (ADT)    is    defined    only    by    its    operations,    not    by    its    implementation.    For example    in    proj1a,    we    developed    an    ArrayDeque    and    a    LinkedListDeque    that    had    the    same methods,    but    how    those    methods    were    written    was    very    different.    In    this    case,    we    say    that ArrayDeque    and    LinkedListDeque    are    implementations    of    the    Deque    ADT.    From    this description,    we    see    that    ADT’s    and    interfaces    are    somewhat    related.    Conceptually,    Deque    is an    interface    for    which    ArrayDeque    and    LinkedListDeque    are    its    implementations.    In    code,    in order    to    express    this    relationship,    we    have    the    ArrayDeque    and    LinkedListDeque    classes inherit    from    the    Deque    interface.</p>
 <h3 id="Deque-ADT-interface"><a href="#Deque-ADT-interface" class="headerlink" title="Deque ADT(interface):"></a>Deque ADT(interface):</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">addFirst(Item x);</span><br><span class="line">addLast(Item x);</span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>;</span><br><span class="line">printDeque();</span><br><span class="line"><span class="function">Item <span class="title">removeFirst</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function">Item <span class="title">removeLast</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function">Item <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span></span>;</span><br></pre></td></tr></table></figure>
-<p><img src="/.com//Capture12.JPG" alt="Capture12"><img alt="Abstract-Data-Type-Sets-Maps-Binary-Search-Tree-Capture12.JPG" src="/.com//Abstract-Data-Type-Sets-Maps-Binary-Search-Tree-Capture12.JPG" width height></p>
+<p><img src="/.io//Capture12.JPG" alt="Capture12"><img alt="Abstract-Data-Type-Sets-Maps-Binary-Search-Tree-Capture12.JPG" src="/.io//Abstract-Data-Type-Sets-Maps-Binary-Search-Tree-Capture12.JPG" width height></p>
 <h3 id="Another-example-of-an-ADT-The-Stack"><a href="#Another-example-of-an-ADT-The-Stack" class="headerlink" title="Another example of an ADT: The Stack"></a>Another example of an ADT: The Stack</h3><p>The Stack ADT supports the following operations:</p>
 <ul>
 <li>push(int x): Puts x on top of the stack.</li>
@@ -354,7 +354,7 @@
 <li>has    2    children</li>
 </ul>
 <h5 id="No-children"><a href="#No-children" class="headerlink" title="No    children"></a>No    children</h5><p>If    the    node    has    no    children,    it    is    a    leaf,    and    we    can    just    delete    its    parent    pointer    and    the    node will    eventually    be    swept    away    by    the    garbage    collector</p>
-<h5 id="One-child"><a href="#One-child" class="headerlink" title="One    child"></a>One    child</h5><p>If    the    node    only    has    one    child,    we    know    that    the    child    maintains    the    BST    property    with    the parent    of    the    node    because    the    property    is    recursive    to    the    right    and    left    subtrees.    Therefore, we    can    just    reassign    the    parent’s    child    pointer    to    the    node’s    child    and    the    node    will eventually    be    garbage    collected.<br><img src="/.com//Capture13.JPG" alt="Capture13"><img alt="Abstract-Data-Type-Sets-Maps-Binary-Search-Tree-Capture13.JPG" src="/.com//Abstract-Data-Type-Sets-Maps-Binary-Search-Tree-Capture13.JPG" width height></p>
+<h5 id="One-child"><a href="#One-child" class="headerlink" title="One    child"></a>One    child</h5><p>If    the    node    only    has    one    child,    we    know    that    the    child    maintains    the    BST    property    with    the parent    of    the    node    because    the    property    is    recursive    to    the    right    and    left    subtrees.    Therefore, we    can    just    reassign    the    parent’s    child    pointer    to    the    node’s    child    and    the    node    will eventually    be    garbage    collected.<br><img src="/.io//Capture13.JPG" alt="Capture13"><img alt="Abstract-Data-Type-Sets-Maps-Binary-Search-Tree-Capture13.JPG" src="/.io//Abstract-Data-Type-Sets-Maps-Binary-Search-Tree-Capture13.JPG" width height></p>
 <blockquote>
 <p>删除仅有一个子节点的节点A，将节点A的父节点的指向A的指针指向A的孩子节点即可</p>
 </blockquote>
@@ -364,7 +364,7 @@
 <li>be    &lt;    than    everything    right    subtree.</li>
 </ul>
 <p>In    the    below    tree,    we    show    which    nodes    would    satisfy    these    requirements    given    that    we    are trying    to    delete    the        dog        node.</p>
-<p><img src="/.com//Capture14.JPG" alt="Capture14"><img alt="Abstract-Data-Type-Sets-Maps-Binary-Search-Tree-Capture14.JPG" src="/.com//Abstract-Data-Type-Sets-Maps-Binary-Search-Tree-Capture14.JPG" width height></p>
+<p><img src="/.io//Capture14.JPG" alt="Capture14"><img alt="Abstract-Data-Type-Sets-Maps-Binary-Search-Tree-Capture14.JPG" src="/.io//Abstract-Data-Type-Sets-Maps-Binary-Search-Tree-Capture14.JPG" width height></p>
 <blockquote>
 <p>Cat 是dog 的predecessor ,elf 则是dog 的successor，要删除某一节点，我们只要找到这个节点的的predecessor 或 successor，并将其放在被删除节点的位置即可。</p>
 </blockquote>
@@ -459,7 +459,7 @@
 <h3 id="Second-Approach"><a href="#Second-Approach" class="headerlink" title="Second Approach"></a>Second Approach</h3><p>Worst case number of == operations:</p>
 <ul>
 <li>Given by area of right triangle of side length N-1.</li>
-<li>Area is Θ(N2).<br><img src="/.com//Capture10.JPG" alt="Capture10"><img alt="Asymptotics-II-Capture10.JPG" src="/.com//Asymptotics-II-Capture10.JPG" width height></li>
+<li>Area is Θ(N2).<br><img src="/.io//Capture10.JPG" alt="Capture10"><img alt="Asymptotics-II-Capture10.JPG" src="/.io//Asymptotics-II-Capture10.JPG" width height></li>
 </ul>
 <table>
 <thead>
@@ -478,7 +478,7 @@
 <h3 id="This-is-not-a-math-class-though-we’ll-expect-you-to-know-these"><a href="#This-is-not-a-math-class-though-we’ll-expect-you-to-know-these" class="headerlink" title="This is not a math class, though we’ll expect you to know these"></a>This is not a math class, though we’ll expect you to know these</h3><p>1 + 2 + 3 + … + Q        = Q(Q+1)/2     = Θ(Q2)<br>1 + 2 + 4 + 8 + … + Q     = 2Q - 1         = Θ(Q)</p>
 <h2 id="Example-3-Tree-Recursion"><a href="#Example-3-Tree-Recursion" class="headerlink" title="Example 3: Tree Recursion"></a>Example 3: Tree Recursion</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">f3</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (n &lt;= <span class="number">1</span>)</span><br><span class="line">      <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">   <span class="keyword">return</span> f3(n-<span class="number">1</span>) + f3(n-<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Count number of calls to f3, given by C(N).<br>C(N) = 1 + 2 + 4 + … + 2^(N-1)<br>Give a simple expression for C(N).<br>C(N) = 2^N - 1(by using 1 + 2 + 4 + 8 + … + Q     = 2Q - 1  )</p>
-<p><img src="/.com//Capture11.JPG" alt="Capture11"><img alt="Asymptotics-II-Capture11.JPG" src="/.com//Asymptotics-II-Capture11.JPG" width height></p>
+<p><img src="/.io//Capture11.JPG" alt="Capture11"><img alt="Asymptotics-II-Capture11.JPG" src="/.io//Asymptotics-II-Capture11.JPG" width height></p>
 <p>Since work during each call is constant:<br>R(N) =  Θ(2N)</p>
 <h2 id="Example-4-Binary-Search"><a href="#Example-4-Binary-Search" class="headerlink" title="Example 4: Binary Search"></a>Example 4: Binary Search</h2><p>Binary    search    is    a    nice    way    of    searching    a    list    for    a    particular    item.    It    requires    the    list    to    be    in sorted    order,    and    uses    that    fact    to    find    an    element    quickly.</p>
 <p>To    do    a    binary    search,    we    start    in    the    middle    of    the    list,    and    check    if    that’s    our    desired element.    If    not,    we    ask:    is    this    element    bigger    or    smaller    than    our    element?</p>
@@ -589,7 +589,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-17 17:57:03" itemprop="dateModified" datetime="2020-03-17T17:57:03+01:00">2020-03-17</time>
+                <time title="Modified: 2020-03-18 05:33:23" itemprop="dateModified" datetime="2020-03-18T05:33:23+01:00">2020-03-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -636,10 +636,10 @@
 <p>可以通用数组很快找到两个元素是否在一个集合，所以交quick find（ Θ(1)）</p>
 </blockquote>
 <p>For    example,    we    represent        {0,    1,    2,    4},    {3,    5},    {6}        as:</p>
-<p><img src="/.com//Capture7.PNG" alt="Capture7"><img alt="cs-61b-Disjoint-Sets-Capture7.PNG" src="/.com//cs-61b-Disjoint-Sets-Capture7.PNG" width height></p>
+<p><img src="/.io//Capture7.PNG" alt="Capture7"><img alt="cs-61b-Disjoint-Sets-Capture7.PNG" src="/.io//cs-61b-Disjoint-Sets-Capture7.PNG" width height></p>
 <p>The    array    indices    (0…6)    are    the    elements.    The    value    at        id[i]        is    the    set    it    belongs    to.    The specific    set    number    doesn’t    matter    as    long    as    all    elements    in    the    same    set    share    the    same id.</p>
 <p><strong><em>connect(x,    y)：</em></strong><br>Let’s    see    how    the    connect    operation    would    work.    Right    now,        id[2]    =    4        and        id[3]    =    5    . After    calling        connect(2,    3)    ,    all    the    elements    with    id    4    and    5    should    have    the    same    id.    Let’s assign    them    all    the    value    5    for    now:</p>
-<p>  <img src="/.com//Capture8.PNG" alt="Capture8"><img alt="cs-61b-Disjoint-Sets-Capture8.PNG" src="/.com//cs-61b-Disjoint-Sets-Capture8.PNG" width height></p>
+<p>  <img src="/.io//Capture8.PNG" alt="Capture8"><img alt="cs-61b-Disjoint-Sets-Capture8.PNG" src="/.io//cs-61b-Disjoint-Sets-Capture8.PNG" width height></p>
 <p><strong>*    isConnected(x,    y)：*</strong><br>To    check        isConnected(x,    y)    ,    we    simply    check    if        id[x]    ==    id[y]    .    Note    this    is    a    constant time    operation!<br>We    call    this    implementation    “Quick    Find”    because    finding    if    elements    are    connected    takes constant    time.</p>
 <p>Summary    and    Code</p>
 <table>
@@ -668,7 +668,10 @@
 
 <h2 id="Quick-Union"><a href="#Quick-Union" class="headerlink" title="Quick    Union"></a>Quick    Union</h2><p>Suppose    we    prioritize    making    the        connect        operation    fast.    We    will    still    represent    our    sets with    an    array.    Instead    of    an    id,    we    assign    each    item    the    index    of    its    parent.    If    an    item    has    no parent,    then    it    is    a    ‘root’    and    we    assign    it    a    negative    value.</p>
 <p>This    approach    allows    us    to    imagine    each    of    our    sets    as    a    tree.    For    example,    we    represent    {0,    1,    2,    4},    {3,    5},    {6}        as:</p>
-<p><img src="/.com//Capture9.JPG" alt="Capture9"><img alt="cs-61b-Disjoint-Sets-Capture9.JPG" src="/.com//cs-61b-Disjoint-Sets-Capture9.JPG" width height></p>
+<p><img src="/.io//cs-61b-Disjoint-Sets-Capture9_43t7kh1lk.JPG" alt="cs-61b-Disjoint-Sets-Capture9"></p>
+<img alt="cs-61b-Disjoint-Sets-cs-61b-Disjoint-Sets-Capture9.JPG" src="/.io//cs-61b-Disjoint-Sets-cs-61b-Disjoint-Sets-Capture9.JPG" width height>
+
+
 <blockquote>
 <p>For    QuickUnion    we    define    a    helper    function        find(int    item)        which    returns    the    root    of    the tree        item        is    in.</p>
 </blockquote>
@@ -902,7 +905,7 @@
 <li>We    can    see    that    the    number    of    equals    can    be    given    by    the    area    of    a    right    triangle,    which has    a    side    length    of    N    -    1</li>
 <li>Therefore,    the    order    of    growth    of    area    is    N Takes    time</li>
 <li>and    practice    to    be    able    to    do    this!</li>
-<li><img src="/.com//Capture6.PNG" alt="Capture6"><img alt="cs-61b-13-Asymoptotics-1-Capture6.PNG" src="/.com//cs-61b-13-Asymoptotics-1-Capture6.PNG" width height></li>
+<li><img src="/.io//Capture6.PNG" alt="Capture6"><img alt="cs-61b-13-Asymoptotics-1-Capture6.PNG" src="/.io//cs-61b-13-Asymoptotics-1-Capture6.PNG" width height></li>
 </ul>
 <h2 id="Big-Theta（有上限和下限）"><a href="#Big-Theta（有上限和下限）" class="headerlink" title="Big-Theta（有上限和下限）"></a>Big-Theta（有上限和下限）</h2><p>we    used    Big    Theta    to    describe    the    order    of    growth（增长率）    of    functions    as    well    as    code pieces.    That’s means that    if    R(N) ∈ Θ(f(N)),    then    R(N)    is    both    upper    and    lower    bounded    by    Θ(f(N)).    Describing    runtime    with    both    an    upper    and    lower    bound    can    informally    be    though of    as    runtime    “equality”.</p>
 <p>For    example,    N +3N ∈ Θ(N ).    It    is    both    upper    and    lower    bounded    by    N .</p>
@@ -1308,7 +1311,7 @@
 <p>The    fundamental    issue    that    gives    rise    to    this    is    that    Objects    cannot    be    compared    with    “&gt;”.</p>
 </blockquote>
 <h3 id="Modification-and-2-Try"><a href="#Modification-and-2-Try" class="headerlink" title="Modification and 2.Try"></a>Modification and 2.Try</h3><p>We    can    create    an    interface    that    guarantees    that    any    implementing    class,    like    Dog,    contains a    comparison    method,    which    we’ll    call        compareTo    .</p>
-<p><img src="/.com//Capture4.PNG" alt="Capture4"><img alt="CS-61b-4-3-Subtype-Polynorphism-vs-Hofs-Capture4.PNG" src="/.com//CS-61b-4-3-Subtype-Polynorphism-vs-Hofs-Capture4.PNG" width height></p>
+<p><img src="/.io//Capture4.PNG" alt="Capture4"><img alt="CS-61b-4-3-Subtype-Polynorphism-vs-Hofs-Capture4.PNG" src="/.io//CS-61b-4-3-Subtype-Polynorphism-vs-Hofs-Capture4.PNG" width height></p>
 <p>Let’s    write    our    interface.    We’ll    specify    one    method        “compareTo”</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">OurComparable</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Object o)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -1369,7 +1372,7 @@
 
 <h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>All    in    all,    we    have    a    Dog    class    that    has    a    private    NameComparator    class    and    a    method    that returns    a    NameComparator    we    can    use    to    compare    dogs    alphabetically    by    name.</p>
 <p>Let’s    see    how    everything    works    in    the    inheritance    hierarchy    -    we    have    a    Comparator interface    that’s    built-in    to    Java,    which    we    can    implement    to    define    our    own    Comparators (    NameComparator    ,        SizeComparator    ,    etc.)    within    Dog.</p>
-<p><img src="/.com//Capture5_cevb69b32.PNG" alt="Capture5"><img alt="CS-61b-4-3-Subtype-Polynorphism-vs-Hofs-Capture5.PNG" src="/.com//CS-61b-4-3-Subtype-Polynorphism-vs-Hofs-Capture5.PNG" width height></p>
+<p><img src="/.io//Capture5_cevb69b32.PNG" alt="Capture5"><img alt="CS-61b-4-3-Subtype-Polynorphism-vs-Hofs-Capture5.PNG" src="/.io//CS-61b-4-3-Subtype-Polynorphism-vs-Hofs-Capture5.PNG" width height></p>
 <p>To    summarize,    interfaces    in    Java    provide    us    with    the    ability    to    make    callbacks.    Sometimes, a    function    needs    the    help    of    another    function    that    might    not    have    been    written    yet    (e.g.        max    needs        compareTo    ).    A    callback    function    is    the    helping    function    (in    the    scenario,        compareTo    ). In    some    languages,    this    is    accomplished    using    explicit    function    passing;    in    Java,    we    wrap the    needed    function    in    an    interface.<br>A    Comparable    says,    “I    want    to    compare    myself    to    another    object”.    It    is    imbedded    within    the object    itself,    and    it    defines    the    natural    ordering    of    a    type.    A    Comparator,    on    the    other    hand, is    more    like    a    third    party    machine    that    compares    two    objects    to    each    other.    Since    there’s only    room    for    one        compareTo        method,    if    we    want    multiple    ways    to    compare,    we    must    turn    to Comparator.</p>
 
       
@@ -1499,7 +1502,7 @@
 <li>hiding    information    that    others    don’t    need(Encapsulation)</li>
 </ul>
 <p>In    computer    science    terms,    a    module    can    be    defined    as    a    set    of    methods    that    work    together as    a    whole    to    perform    a    task    or    set    of    related    tasks.    This    could    be    something    like    a    class    that represents    a    list.    Now,    if    the    implementation    details    of    a    module    are    kept    internally    hidden and    the    only    way    to    interact    with    it    is    through    a    documented    interface,    then    that    module    is said    to    be    encapsulated.</p>
-<img alt="cs-61b-Extends-Casting-Higher-Order-Functions-Capture1.PNG" src="/.com//cs-61b-Extends-Casting-Higher-Order-Functions-Capture1.PNG" width height>
+<img alt="cs-61b-Extends-Casting-Higher-Order-Functions-Capture1.PNG" src="/.io//cs-61b-Extends-Casting-Higher-Order-Functions-Capture1.PNG" width height>
 
 <p>Take    the        ArrayDeque        class,    for    example.    The    outside    world    is    able    to    utilize    and    interact    with an        ArrayDeque        through    its    defined    methods,    like        addLast        and        removeLast    .    However,    they need    not    understand    the    complex    details    of    how    the    data    structure    was    implemented    in order    to    be    able    to    use    it    effectively.</p>
 <h4 id="Abstraction-Barriers"><a href="#Abstraction-Barriers" class="headerlink" title="Abstraction Barriers"></a>Abstraction Barriers</h4><p>By using the keyword “private” we can ensure that the inside of a box(Encapsulation/封装) can’t been seen.This approach help us to reduce the complexity of reusing a code.</p>
@@ -1520,7 +1523,7 @@
 <blockquote>
 <p>runtime type means dynamic types<br>compile type means static types</p>
 </blockquote>
-<p><img src="/.com//Capture2.PNG" alt="Capture2"></p>
+<p><img src="/.io//Capture2.PNG" alt="Capture2"></p>
 <p>Let’s    go    through    this    program.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">VengefulSLList&lt;Integer&gt; vsl=<span class="keyword">new</span> VengefulSLList&lt;Integer&gt;(<span class="number">9</span>);</span><br><span class="line">SLList&lt;Integer&gt;	sl=vsl;</span><br></pre></td></tr></table></figure>
 <p>These    two    lines    above    compile    just    fine.    Since        VengefulSLList        “is-an”    SLList,    it’s    valid    to put    an    instance    of    the        VengefulSLList        class    inside    an        SLList        “container”</p>
@@ -1686,7 +1689,7 @@
 <blockquote>
 <p>with this tag <strong>*”@Override”*</strong> we can prevent this awkward situation:<br>Say    we    want    to    override    the        addLast        method.    What    if    we    make    a    typo    and    accidentally write        addLsat    ?    If    we    don’t    include    the    @Override    tag,    then    we    might    not    catch    the mistake,    which    could    make    debugging    a    more    difficult    and    painful    process.    Whereas    if    we include    @Override,    the    compiler    will    stop    and    prompt    you    to    fix    your    mistakes    before    your program    even    runs.</p>
 </blockquote>
-<h2 id="Interface-Inheritance"><a href="#Interface-Inheritance" class="headerlink" title="Interface Inheritance"></a>Interface Inheritance</h2><p><img src="/.com//Capture_3za2mffd8.PNG" alt="Capture"></p>
+<h2 id="Interface-Inheritance"><a href="#Interface-Inheritance" class="headerlink" title="Interface Inheritance"></a>Interface Inheritance</h2><p><img src="/.io//Capture_3za2mffd8.PNG" alt="Capture"></p>
 <blockquote>
 <p>White box is Interface<br>Green box is class</p>
 </blockquote>
